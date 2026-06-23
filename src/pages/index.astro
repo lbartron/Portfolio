@@ -5,6 +5,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Home">
   <!-- Everything here gets injected into the <slot /> of BaseLayout -->
-  <h1>Welcome to my Digital Garden</h1>
-  <p>Here are my recent thoughts...</p>
+  <div class = "layout">
+    <aside class = sidebar>
+      <section class = sidebar-section>
+        <h3> Leo Bartron </h3>
+      </section>
+      <section class = sidebar-section>
+        <h4> About Me </h4>
+        <div class = sidebar-content>
+          <p>
+            I'm a current student studying computer science and software engineering! 
+          </p>
+        </div>
+      </section>
+    </aside>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <div class = "hero">
+          <h1>Hi, I'm Leo!</h1>
+        </div>
+        <div class = main-content-section>
+
+        </div>
+        <div class = main-content-section>
+          
+        </div>
+      </div>
+      <footer class = "footer">
+
+      </footer>
+    </div>
+  </div>
 </BaseLayout>
