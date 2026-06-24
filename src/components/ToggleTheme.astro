@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="icon-container">
+  <button id="theme-toggle" class="toggle-btn" aria-label="Toggle Theme">
+    <Icon name="light-icon" class = "sun-icon"/>
+    <Icon name="dark-icon" class = "moon-icon"/>
+  </button> 
+</div>
+
+
+<style>
+  :global(:root){
+    color-scheme: light dark;
+  }
+
+  :global(html[data-theme="light"] [data-icon="light-icon"]) {
+    display: none;
+  }
+
+  :global(html[data-theme="dark"] [data-icon="dark-icon"]) {
+    display: none;
+  }
+
+  .icon-container{
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* padding-left: 8px; */
+    padding-top: 12px;
+    margin-left: auto;
+    font-size: 32px;
+  }
+</style>
+
+<script>
+  const button = document.getElementById('theme-toggle');
+  
+  const getTheme = () => {
+    return window.getComputedStyle(document.documentElement).colorScheme;
+  };
+
+  button?.addEventListener('click', () => {
+    const nextTheme = getTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    document.documentElement.style.colorScheme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+  });
+</script>
