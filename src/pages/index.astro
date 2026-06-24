@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ToggleTheme from '../components/ToggleTheme.astro';
 // Get recent notes/projects here
 ---
 
@@ -8,7 +9,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class = "layout">
     <aside class = sidebar>
       <section class = sidebar-section>
-        <h3> Leo Bartron </h3>
+        <div class = sidebar-toggles>
+          <h3> Leo Bartron </h3>
+          <ToggleTheme/>
+        </div>
       </section>
       <section class = sidebar-section>
         <h4> About Me </h4>
@@ -23,9 +27,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class = main-content-wrapper>
         <div class = "hero">
           <h1>Hi, I'm Leo!</h1>
+          <p>This is a little information about me</p>
         </div>
         <div class = main-content-section>
-
+          <h1>Projects</h1>
         </div>
         <div class = main-content-section>
           

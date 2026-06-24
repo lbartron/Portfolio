@@ -5,10 +5,16 @@ const {pageTitle} = Astro.props;
 ---
 
 <html lang="en"> 
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
     <title>{pageTitle}</title>
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      document.documentElement.style.colorScheme = savedTheme;
+  </script>
   </head>
   <body>
     <!-- The page content will render here -->
