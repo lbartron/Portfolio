@@ -5,6 +5,15 @@ import Footer from '../components/Footer.astro';
 // Get recent notes/projects here
 ---
 
+<style>
+  .main-content-wrapper h1{
+    font-size: 48px;
+  }
+  .main-content-wrapper h2{
+    font-size: 32px;
+  }
+</style>
+
 <BaseLayout title="Home">
   <!-- Everything here gets injected into the <slot /> of BaseLayout -->
   <div class = "layout">
@@ -16,10 +25,13 @@ import Footer from '../components/Footer.astro';
           <p>This is a little information about me</p>
         </div>
         <div class = main-content-section>
-          <h1>Projects</h1>
+          <h2>Projects</h2>
         </div>
         <div class = main-content-section>
-          <h1>Notes</h1>
+          <h2>Notes</h2>
+        </div>
+        <div class = main-content-section>
+          <h2>Recent Activity</h2>
         </div>
       </div>
       <Footer/>
