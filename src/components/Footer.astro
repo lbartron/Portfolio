@@ -3,9 +3,37 @@
 ---
 
 <footer class = "footer">
-
+  <section class = footer-section>
+    <nav class = footer-links>
+      <a href = "https://github.com/lbartron">
+        GitHub
+      </a>
+      <a href = "https://www.linkedin.com/in/leo-bartron">
+        LinkedIn
+      </a>
+    </nav>
+    <p> Made by Leo Bartron </p>
+  </section>
 </footer>
 
 <style>
-  
+  .footer-section{
+    border-top: 1px solid var(--border-color);
+    padding-left: 100px;
+  }
+
+  .footer-links{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .footer-links a{
+    padding-top: 3rem;
+    padding-bottom: 0.5rem;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-main);
+  }
 </style>
