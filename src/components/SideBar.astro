@@ -1,11 +1,12 @@
 ---
 import ToggleTheme from '../components/ToggleTheme.astro';
+import { Icon } from "astro-icon/components";
 ---
 
 <aside class = sidebar>
   <section class = sidebar-section>
     <div class = sidebar-toggles>
-      <h3> Leo Bartron </h3>
+      <h2> Leo Bartron </h2>
       <ToggleTheme/>
     </div>
   </section>
@@ -13,32 +14,56 @@ import ToggleTheme from '../components/ToggleTheme.astro';
     <h4> About Me </h4>
     <div class = sidebar-content>
       <p>
-        I'm a current student studying computer science and software engineering! 
+        I'm a current student majoring in Computer Science and Software Engineering! 
       </p>
     </div>
   </section>
   <section class = sidebar-section>
     <nav class = sidebar-nav-links>
-      <a href = ""> </a>
+      <a href = "/projects/">
+        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>
+        Projects
+      </a>
+      <a href = "/notes/">
+        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>
+        Notes
+      </a>
+      <a href = "/about/">
+        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>        
+        About Me
+      </a>
     </nav>
+  </section>
+  <section class = sidebar-section>
+    <h4>Connect With Me</h4>
+    <p class = sidebar-connection-links>
+      <a href = "https://github.com/lbartron">
+        GitHub
+      </a>
+      <a href = "https://www.linkedin.com/in/leo-bartron">
+        LinkedIn
+      </a>
+    </p>
   </section>
 </aside>
 
 
 <style>
   .sidebar{
-    width: 250px;
+    width: 260px;
     flex-shrink: 0;
     border-right: 1px solid var(--border-color);
     background-color: var(--bg-color);
     top: 0;
     left: 0;
-    display: block;
+    /* display: block; */
   }
 
   .sidebar-section{
     border-bottom: 1px solid var(--border-color);
-    padding: 10px 20px;
+    /* padding: 15px 20px; */
+    padding-bottom: 10px;
+    margin: 1.25rem;
   }
 
   .sidebar-toggles{
@@ -46,5 +71,42 @@ import ToggleTheme from '../components/ToggleTheme.astro';
     width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .sidebar-nav-links{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .sidebar-nav-links a{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-main);
+  }
+
+  .sidebar-nav-icon{
+    font-size: 24px;
+    margin-right: 10px;
+    border: none;
+  }
+
+  .sidebar-connection-links{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-connection-links a{
+    color: var(--text-muted);
+    padding-bottom: 10px;
+  }
+
+  .sidebar h4{
+    margin: 0;
+    font-size: 17px;
   }
 </style>
