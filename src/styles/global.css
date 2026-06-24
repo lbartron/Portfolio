@@ -2,7 +2,7 @@
   color-scheme: light dark; /* Enables native light-dark() */
 
   /* Color Palette */
-  --bg-color: light-dark(#ffffff, #111111);
+  --bg-color: light-dark(#fff2e4, #111111);
   --text-main: light-dark(#333333, #eeeeee);
   --text-muted: light-dark(#777777, #999999);
   --accent: light-dark(#0055ff, #66b2ff);
@@ -17,7 +17,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: var(--font-sans);
-  max-width: 900px;
+  /* max-width: 900px; */
   margin: 0 auto;
   padding: 2rem;
   line-height: 1.6;
@@ -52,6 +52,18 @@ a:hover {
   padding: 10px 20px;
 }
 
+.sidebar-toggles{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .main-container{
   flex-grow: 1;
+  padding: 25px 50px;
+}
+
+.hero, .main-content-section{
+  margin-bottom: 5rem;
 }
