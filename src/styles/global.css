@@ -2,7 +2,7 @@
   color-scheme: light dark; /* Enables native light-dark() */
 
   /* Color Palette */
-  --bg-color: light-dark(#f6efe0, #1d1b1b);
+  --bg-color: light-dark(#fffaef, #1d1b1b);
   --text-main: light-dark(#333333, #eeeeee);
   --text-muted: light-dark(#777777, #999999);
   --accent: light-dark(#0055ff, #66b2ff);
@@ -19,8 +19,9 @@ body {
   font-family: var(--font-sans);
   /* max-width: 900px; */
   margin: 0 auto;
-  padding: 2rem;
-  line-height: 1.6;
+  /* padding-left: 2rem; */
+  padding-right: 2rem;
+  /* line-height: 1.6; */
 }
 
 a {
@@ -29,7 +30,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .layout{
@@ -39,7 +40,10 @@ a:hover {
 
 .main-container{
   flex-grow: 1;
-  padding: 25px 50px;
+}
+
+.main-content-wrapper{
+  padding: 25px 100px;
 }
 
 .hero, .main-content-section{
