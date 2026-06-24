@@ -1,0 +1,50 @@
+---
+import ToggleTheme from '../components/ToggleTheme.astro';
+---
+
+<aside class = sidebar>
+  <section class = sidebar-section>
+    <div class = sidebar-toggles>
+      <h3> Leo Bartron </h3>
+      <ToggleTheme/>
+    </div>
+  </section>
+  <section class = sidebar-section>
+    <h4> About Me </h4>
+    <div class = sidebar-content>
+      <p>
+        I'm a current student studying computer science and software engineering! 
+      </p>
+    </div>
+  </section>
+  <section class = sidebar-section>
+    <nav class = sidebar-nav-links>
+      <a href = ""> </a>
+    </nav>
+  </section>
+</aside>
+
+
+<style>
+  .sidebar{
+    width: 250px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    top: 0;
+    left: 0;
+    display: block;
+  }
+
+  .sidebar-section{
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 20px;
+  }
+
+  .sidebar-toggles{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>

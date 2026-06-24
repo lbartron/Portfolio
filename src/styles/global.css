@@ -2,7 +2,7 @@
   color-scheme: light dark; /* Enables native light-dark() */
 
   /* Color Palette */
-  --bg-color: light-dark(#fff2e4, #111111);
+  --bg-color: light-dark(#f6efe0, #1d1b1b);
   --text-main: light-dark(#333333, #eeeeee);
   --text-muted: light-dark(#777777, #999999);
   --accent: light-dark(#0055ff, #66b2ff);
@@ -35,28 +35,6 @@ a:hover {
 .layout{
   display: flex;
   min-height: 100vh;
-}
-
-.sidebar{
-  width: 250px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border-color);
-  background-color: var(--bg-color);
-  top: 0;
-  left: 0;
-  display: block;
-}
-
-.sidebar-section{
-  border-bottom: 1px solid var(--border-color);
-  padding: 10px 20px;
-}
-
-.sidebar-toggles{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .main-container{

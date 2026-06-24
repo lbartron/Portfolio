@@ -1,28 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ToggleTheme from '../components/ToggleTheme.astro';
+import SideBar from '../components/SideBar.astro';
+import Footer from '../components/Footer.astro';
 // Get recent notes/projects here
 ---
 
 <BaseLayout title="Home">
   <!-- Everything here gets injected into the <slot /> of BaseLayout -->
   <div class = "layout">
-    <aside class = sidebar>
-      <section class = sidebar-section>
-        <div class = sidebar-toggles>
-          <h3> Leo Bartron </h3>
-          <ToggleTheme/>
-        </div>
-      </section>
-      <section class = sidebar-section>
-        <h4> About Me </h4>
-        <div class = sidebar-content>
-          <p>
-            I'm a current student studying computer science and software engineering! 
-          </p>
-        </div>
-      </section>
-    </aside>
+    <SideBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div class = "hero">
@@ -33,12 +19,10 @@ import ToggleTheme from '../components/ToggleTheme.astro';
           <h1>Projects</h1>
         </div>
         <div class = main-content-section>
-          
+          <h1>Notes</h1>
         </div>
       </div>
-      <footer class = "footer">
-
-      </footer>
+      <Footer/>
     </div>
   </div>
 </BaseLayout>
