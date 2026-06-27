@@ -1,0 +1,73 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SideBar from '../../components/SideBar.astro';
+import Footer from '../../components/Footer.astro';
+import 'katex/dist/katex.min.css'
+
+export async function getStaticPaths() {
+  const projectEntries = await getCollection('projects');
+
+  // Loop through projects and create a route for each one
+  return projectEntries.map(entry => ({
+    // Turl slug param into url
+    params: { slug: entry.id },
+    // Pass markdown file's data forward as props
+    props: { entry },
+  }));
+}
+
+// Grab md file content and extract it for each project 
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout pageTitle={entry.data.title}>
+  <div class = "layout">
+    <SideBar/>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <article class="project-case-study">
+          <header class="project-header">
+            <h1>{entry.data.title}</h1>
+            <p class="description">{entry.data.description}</p>
+            
+            <!-- Potential Tech Stack for each project page -->
+            <!-- <div class="tech-stack">
+              {entry.data.techStack.map((tech) => (
+                <span class="tag">{tech}</span>
+              ))}
+            </div> -->
+          </header>
+          <!-- Markdown content is loaded here. Tailwind helps with text color theme -->
+          <div class="markdown-content prose dark:prose-invert">
+            <Content />
+          </div>
+        </article>
+      </div>
+      <Footer/>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .project-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+  }
+  
+  /* Potential CSS for Tech Stack tags */
+  /* .tag {
+    background: var(--sidebar-bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  } */
+
+  .markdown-content{
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+</style>
