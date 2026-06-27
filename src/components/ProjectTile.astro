@@ -1,0 +1,162 @@
+---
+const { 
+  title, description, 
+  themeColor = "#0055ff", // Default fallback color
+  slug, githubUrl, 
+  liveUrl, detailsUrl,
+  devpostUrl } = Astro.props;
+---
+
+<div class="blueprint-background-container" style={`--project-color: ${themeColor};`}>
+    <div class="glass-card">
+    {/*Link title to project page */}
+    <a href={`/projects/${slug}`} class="project-title">
+      <h3>{title}</h3>
+    </a>
+    
+    <p class="project-desc">{description}</p>
+    
+    <!-- Project Buttons -->
+    <div class="project-links">
+      
+      {/* Conditionally render buttons if urls exist*/}
+      {liveUrl && (
+        <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="btn primary-btn">
+          Launch App ↗
+        </a>
+      )}
+      
+      {githubUrl && (
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="btn secondary-btn">
+          GitHub
+        </a>
+      )}
+
+      {detailsUrl && (
+        <a href={detailsUrl} target="_blank" rel="noopener noreferrer" class="btn secondary-btn">
+          Details →
+        </a>
+      )}
+
+      {devpostUrl && (
+        <a href={devpostUrl} target="_blank" rel="noopener noreferrer" class="btn secondary-btn">
+          Devpost →
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Blueprint Background
+   * Creates a graph-paper grid using linear gradients
+   */
+  .blueprint-background-container {
+    background-color: var(--bg-color);
+    background-image: 
+      /* horizontal lines */
+      linear-gradient(var(--project-color) 1px, transparent 1px),
+      /* vertical lines */
+      linear-gradient(90deg, var(--project-color) 1px, transparent 1px);
+    background-size: 20px 20px; /* blueprint grid cell size */
+    background-position: center;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    max-width: 80%;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .blueprint-background-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--project-color);
+  }
+  
+  /* Pseudo-element overlay to dim the grid so text stays readable */
+  .blueprint-background-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-color);
+    opacity: 0.75; /* Adjust this to make the grid brighter or dimmer */
+    z-index: 0;
+  }
+
+  /* Frosted glass effect
+   * Uses backdrop-filter to blur grid lines. Contents of class
+     remain unchanged.
+   */
+  .glass-card {
+    position: relative;
+    z-index: 1;
+    /* Uses light-dark themes*/
+    background: light-dark(rgba(255, 255, 255, 0.65), rgba(17, 17, 17, 0.75));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+  }
+
+  /* TITLE STYLING */
+  .project-title {
+    text-decoration: none;
+  }
+
+  .project-title h3 {
+    margin-top: 0;
+    color: var(--project-color);
+    display: inline-block;
+  }
+
+  .project-title:hover h3 {
+    text-decoration: underline;
+  }
+
+  .project-desc {
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+  }
+
+  /* BUTTON STYLING */
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap; /* Prevents buttons from squishing on mobile */
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .primary-btn {
+    background: var(--project-color);
+    color: #ffffff;
+    border: 1px solid var(--project-color);
+  }
+  
+  .primary-btn:hover {
+    opacity: 0.85;
+  }
+
+  .secondary-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+  }
+
+  .secondary-btn:hover {
+    border-color: var(--project-color);
+    color: var(--project-color);
+  }
+</style>
