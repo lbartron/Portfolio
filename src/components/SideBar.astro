@@ -6,7 +6,9 @@ import { Icon } from "astro-icon/components";
 <aside class = sidebar>
   <section class = sidebar-section>
     <div class = sidebar-toggles>
-      <h2> Leo Bartron </h2>
+      <a href = "/" class = home-link>
+        <h2> Leo Bartron </h2>
+      </a>
       <ToggleTheme/>
     </div>
   </section>
@@ -71,6 +73,11 @@ import { Icon } from "astro-icon/components";
     width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .home-link{
+    text-decoration: none;
+    color: var(--text-main);
   }
 
   .sidebar-nav-links{
