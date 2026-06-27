@@ -2,19 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SideBar from '../components/SideBar.astro';
 import Footer from '../components/Footer.astro';
-// Get recent notes/projects here
+
+// Get recent notes/projects
+import { getCollection } from 'astro:content';
+import ProjectTile from '../components/ProjectTile.astro';
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects.filter(p => p.data.featured);
 ---
 
-<style>
-  .main-content-wrapper h1{
-    font-size: 48px;
-  }
-  .main-content-wrapper h2{
-    font-size: 32px;
-  }
-</style>
-
-<BaseLayout title="Home">
+<BaseLayout pageTitle="Home">
   <!-- Everything here gets injected into the <slot /> of BaseLayout -->
   <div class = "layout">
     <SideBar/>
@@ -26,6 +23,20 @@ import Footer from '../components/Footer.astro';
         </div>
         <div class = main-content-section>
           <h2>Projects</h2>
+          <div class="projects-grid">
+            {featuredProjects.map((project) => (
+              <ProjectTile 
+                title={project.data.title}
+                description={project.data.description}
+                themeColor={project.data.themeColor}
+                slug={project.id} 
+                liveUrl={project.data.liveUrl}
+                githubUrl={project.data.githubUrl}
+                detailsUrl={project.data.detailsUrl}
+                devpostUrl={project.data.devpostUrl}
+              />
+            ))}
+          </div>
         </div>
         <div class = main-content-section>
           <h2>Notes</h2>
@@ -38,3 +49,28 @@ import Footer from '../components/Footer.astro';
     </div>
   </div>
 </BaseLayout>
+
+
+<style>
+  .main-content-wrapper h1{
+    font-size: 48px;
+  }
+
+  .main-content-wrapper h2{
+    font-size: 32px;
+  }
+
+  .projects-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Temporary media setting to stack grid tiles to 
+     single column on small screens */
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
