@@ -37,6 +37,17 @@ import { Icon } from "astro-icon/components";
     </nav>
   </section>
   <section class = sidebar-section>
+    <h4> Endorsements </h4>
+    <p>
+      He is the perfect fit for any work environment! 
+      <span class = accent-text>-CEO of Awesome Company</span>
+    </p>
+    <p>
+      This guy can write some great code. 
+      <span class = accent-text>-My Dog</span>
+    </p>
+  </section>
+  <section class = sidebar-section>
     <h4>Connect With Me</h4>
     <p class = sidebar-connection-links>
       <a href = "https://github.com/lbartron">
@@ -54,11 +65,16 @@ import { Icon } from "astro-icon/components";
   .sidebar{
     width: 260px;
     flex-shrink: 0;
-    border-right: 1px solid var(--border-color);
-    background-color: var(--bg-color);
     top: 0;
     left: 0;
     /* display: block; */
+    height: 100vh;
+    position: sticky;
+    overflow-y: auto;
+
+    /* Right Border */
+    border-right: 1px solid var(--border-color);
+    background-color: var(--bg-color);
   }
 
   .sidebar-section{
@@ -66,6 +82,10 @@ import { Icon } from "astro-icon/components";
     /* padding: 15px 20px; */
     padding-bottom: 10px;
     margin: 1.25rem;
+  }
+
+  .sidebar > section:last-of-type {
+    border-bottom: none;
   }
 
   .sidebar-toggles{
@@ -115,5 +135,10 @@ import { Icon } from "astro-icon/components";
   .sidebar h4{
     margin: 0;
     font-size: 17px;
+  }
+
+  .accent-text{
+    color: var(--retro-navy);
+    display: block;
   }
 </style>
