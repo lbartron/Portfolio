@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SideBar from '../components/SideBar.astro';
+import Footer from '../components/Footer.astro';
+import NoteTile from '../components/NoteTile.astro';
+
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('notes');
+
+// Sort notes by date (newest first)
+const sortedNotes = allNotes.sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+// Group notes by year for the UI
+const groupedNotes = sortedNotes.reduce<Record<string, typeof sortedNotes>>((acc, note) => {
+  const year = note.data.date ? new Date(note.data.date).getFullYear() : 'Ongoing';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(note);
+  return acc;
+}, {});
+
+// Get an array of years sorted descending (e.g., 2026, 2025, Ongoing)
+const sortedYears = Object.keys(groupedNotes).sort((a, b) => {
+  if (a === 'Ongoing') return -1;
+  if (b === 'Ongoing') return 1;
+  return parseInt(b) - parseInt(a);
+});
+---
+
+<BaseLayout pageTitle="Notes">
+  <div class = "layout">
+    <SideBar/>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <div>
+          <h1>Notes</h1>
+          <p class = hero-text>These are some notes about anything ranging from technical work to personal interests</p>
+          {/* Dynamically render grouped years and their respective notes */}
+          {sortedYears.map((year) => (
+            <div class="main-content-section">
+              <h2>{year}</h2>
+              <div class="note-list">
+                {groupedNotes[year].map((note) => (
+                <NoteTile
+                  title = {note.data.title}
+                  description = {note.data.description}
+                  slug = {note.id}
+                  date = {note.data.date}
+                />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    <Footer/>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  h1{
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 32px;
+  }
+</style>

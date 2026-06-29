@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SideBar from '../components/SideBar.astro';
+import Footer from '../components/Footer.astro';
+
+---
+
+<BaseLayout pageTitle="About">
+  <div class = "layout">
+    <SideBar/>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <div class = main-content-section>
+          <p>
+              I'm Leo, a Computer Science and Software Engineering student at the University
+              Of Washington Bothell. I started my coding journey by learning the basics of
+              HTML, CSS, and JavaScript, which later led me to explore more advanced languages 
+              like C++ and Python. My goal is to become a full stack developer with a focus on database management and engineering.
+          </p>
+          <p>
+              I aim to use my creative drive and logical approach to problem solving in order to become
+              a developer who writes meaningful code-solutions that not only function well but have a positive
+              impact on society.
+          </p>
+          <p>
+              Even from a young age, I've been fascinated by how things are made. I would often look
+              around and wonder how things were built or even how they could be improved. Today,
+              I apply this same sense of curiosity and attention to detail to the porjects I build, always
+              thinking about how functionality, design, and user experience can be refined. 
+          </p>
+        </div>
+      </div>
+    <Footer/>
+    </div>
+  </div>
+</BaseLayout>
