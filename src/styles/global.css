@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark; /* Enables native light-dark() */
+  color-scheme: light dark;
 
   /* Color Palette */
   --bg-color: light-dark(#fffaef, #1d1b1b);
@@ -11,6 +11,14 @@
 
   /* Typography */
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Chango', cursive;
+
+  /* Retro Text Pallete */
+  --retro-yellow: #F9C846;
+  --retro-orange: #F9844A;
+  --retro-red: #F94144;
+  --retro-navy: #277DA1;
+  --retro-dark: #194e66;
 }
 
 body {
@@ -44,8 +52,121 @@ a:hover {
 
 .main-content-wrapper{
   padding: 25px 100px;
+
+  background-image: 
+      /* Smallest ticks (1/8 inch marks) */
+      repeating-linear-gradient(
+        to bottom,
+        var(--text-muted) 0,
+        var(--text-muted) 1px,
+        transparent 1px,
+        transparent 11.25px
+      ),
+      /* Small ticks (1/4 inch marks) */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 11.25px,
+        var(--text-muted) 11.25px,
+        var(--text-muted) 12.25px,
+        transparent 12.25px,
+        transparent 22.5px
+      ),
+      /* Medium ticks (1/2 inch marks) */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 22.5px,
+        var(--text-muted) 22.5px,
+        var(--text-muted) 23.5px,
+        transparent 23.5px,
+        transparent 45px
+      ),
+      /* Long ticks (inch marks) */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 45px,
+        var(--text-muted) 45px,
+        var(--text-muted) 46px,
+        transparent 46px,
+        transparent 90px
+      );
+    /* Set tick size from shortest to longest */
+    background-size: 
+      6px 100%,
+      12px 100%,
+      20px 100%,
+      30px 100%;
+    background-position: 
+      left top,
+      left top,
+      left top,
+      left top;
+    background-repeat: repeat-y;
 }
 
 .hero, .main-content-section{
   margin-bottom: 5rem;
+}
+
+.hero-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.projects-grid > * {
+  aspect-ratio: 16 / 9;
+  overflow: hidden; 
+}
+
+.note-list{
+  display: flex-end;
+  flex-direction: column;
+}
+
+.retro-text {
+  font-family: var(--font-display);
+  color: var(--bg-color); 
+  -webkit-text-stroke: 1.5px var(--text-main);
+  text-shadow:
+    .1rem .1rem 0px var(--retro-yellow),
+    .2rem .2rem 0px var(--retro-orange),
+    .3rem .3rem 0px var(--retro-red),
+    .4rem .4rem 0px var(--retro-dark);
+}
+
+/* Interactive version for links */
+.retro-link {
+  display: inline-block;
+  font-family: var(--font-display);
+  color: var(--bg-color);
+  -webkit-text-stroke: 1.5px var(--text-main);
+  text-decoration: none;
+  text-shadow:
+    .1rem .1rem 0px var(--retro-yellow),
+    .2rem .2rem 0px var(--retro-orange),
+    .3rem .3rem 0px var(--retro-red),
+    .4rem .4rem 0px var(--retro-dark);
+  font-size: 2rem;
+  font-weight: 800;
+  transition: transform 0.15s ease, text-shadow 0.15s ease;
+}
+
+.retro-link:hover {
+  transform: translate(.2rem, .2rem);
+  text-shadow:
+  .1rem .1rem 0px var(--retro-yellow),
+  .2rem .2rem 0px var(--retro-dark);
+}
+
+.retro-link:active {
+  transform: translate(8px, 8px);
+  text-shadow: none;
 }
