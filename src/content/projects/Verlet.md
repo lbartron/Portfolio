@@ -2,7 +2,7 @@
 title: "Verlet Physics Simulator"
 description: "An efficient particle simulator utilizing Verlet Integration."
 featured: true
-themeColor: "#18a72b"
+themeColor: "#df8e14"
 liveUrl: ""
 githubUrl: "https://github.com/lbartron/Verlet"
 detailsUrl: ""

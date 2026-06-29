@@ -2,7 +2,7 @@
 title: "UW Search"
 description: "An NLP powered University Of Washington Search Engine for events and buildings."
 featured: true
-themeColor: "#18a72b"
+themeColor: "#5f2dc4"
 liveUrl: ""
 githubUrl: "https://github.com/lbartron/UW-Campus-Search-Engine"
 detailsUrl: "https://lbartron.github.io/UW-Campus-Search-Engine/"
