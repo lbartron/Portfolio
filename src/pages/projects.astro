@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SideBar from '../components/SideBar.astro';
+import Footer from '../components/Footer.astro';
+
+import { getCollection } from 'astro:content';
+import ProjectTile from '../components/ProjectTile.astro';
+
+const allProjects = await getCollection('projects');
+---
+
+<BaseLayout pageTitle="Projects">
+  <div class = "layout">
+    <SideBar/>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <div class = main-content-section>
+          <h1>Projects</h1>
+          <p class = hero-text>Here's some of the projects I've been working on!</p>
+          <div class="projects-grid">
+            {allProjects.map((project) => (
+              <ProjectTile 
+                title={project.data.title}
+                description={project.data.description}
+                themeColor={project.data.themeColor}
+                slug={project.id} 
+                liveUrl={project.data.liveUrl}
+                githubUrl={project.data.githubUrl}
+                detailsUrl={project.data.detailsUrl}
+                devpostUrl={project.data.devpostUrl}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <Footer/>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  h1{
+    font-size: 3rem;
+  }
+</style>
