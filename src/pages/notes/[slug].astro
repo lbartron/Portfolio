@@ -1,0 +1,173 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SideBar from '../../components/SideBar.astro';
+import Footer from '../../components/Footer.astro';
+import 'katex/dist/katex.min.css'
+
+export async function getStaticPaths() {
+  const noteEntries = await getCollection('notes');
+
+  return noteEntries.map(entry => {
+    return {
+      params: { slug: entry.id },
+      props: { entry },
+    };
+  });
+}
+
+// Grab md file content and extract it
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+// Filter out h1 (remove page title) and only keep h2 and h3 for cleaner ToC
+const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
+---
+
+<BaseLayout pageTitle={entry.data.title || "Note"}>
+  <div class="layout">
+    <SideBar />
+    <div class="main-container">
+      <div class="main-content-wrapper note-page-wrapper">
+        
+        <!-- Left Side Note Content -->
+        <article class="project-content">
+          <header class="project-header">
+            <h1>{entry.data.title || "Untitled Note"}</h1>
+            {entry.data.description && <p class="description">{entry.data.description}</p>}
+          </header>
+          
+          <div class="markdown-content prose dark:prose-invert">
+            <Content />
+          </div>
+        </article>
+
+        <!-- Right Side Graph view and TOC -->
+        <aside class="note-sidebar">
+          <div class="sticky-sidebar-content">
+
+            <!-- Initial Graph View Container -->
+            <div class="graph-placeholder">
+              <span class="graph-label">Graph View (Coming Soon)</span>
+            </div>
+
+            <!-- Table of Contents -->
+            {tocHeadings.length > 0 && (
+              <div class="toc-container">
+                <h3>On This Page</h3>
+                <nav class="toc-nav">
+                  <ul>
+                    {tocHeadings.map((heading) => (
+                      <li class={`toc-level-${heading.depth}`}>
+                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            )}
+          </div>
+        </aside>
+
+      </div>
+      <Footer/>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Split the main wrapper into a 2-column grid for the note and sidebar */
+  .note-page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .project-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+  }
+
+  .markdown-content {
+    line-height: 1.6;
+  }
+
+  /* Sticky Right Sidebar */
+  .sticky-sidebar-content {
+    position: sticky;
+    top: 2rem; /* How far from the top of the screen it sticks */
+  }
+
+  /* ToC Styling */
+  .toc-container h3 {
+    font-size: 1.1rem;
+    color: var(--retro-navy);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .toc-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-nav li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .toc-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .toc-nav a:hover {
+    color: var(--retro-orange);
+  }
+
+  /* Indent H3s slightly to show hierarchy */
+  .toc-level-3 {
+    padding-left: 1rem;
+  }
+
+  /* Placeholder styles for Graph View */
+  .graph-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: light-dark(#fdfdfd, #2a2a2a);
+    background-image: radial-gradient(light-dark(rgba(0,0,0,0.15), rgba(255,255,255,0.15)) 1px, transparent 1px);
+    background-size: 16px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .graph-label {
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+  }
+
+  /* Initial responsive design */
+  @media (max-width: 1024px) {
+    .note-page-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .note-sidebar {
+      order: -1; /* Puts ToC/Graph above the note content on mobile */
+      margin-bottom: 2rem;
+    }
+    .sticky-sidebar-content {
+      position: relative;
+      top: 0;
+    }
+  }
+</style>
