@@ -55,14 +55,14 @@ const {
     background-color: var(--bg-color);
     background-image: 
       /* horizontal lines */
-      linear-gradient(var(--project-color) 1px, transparent 1px),
+      linear-gradient(var(--retro-navy) 1px, transparent 1px),
       /* vertical lines */
-      linear-gradient(90deg, var(--project-color) 1px, transparent 1px);
+      linear-gradient(90deg, var(--retro-navy) 1px, transparent 1px);
     background-size: 20px 20px; /* blueprint grid cell size */
     background-position: center;
     padding: 2rem;
     border-radius: 8px;
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
     margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
@@ -72,9 +72,9 @@ const {
   }
 
   .blueprint-background-container:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    border-color: var(--project-color);
+    transform: translate(-6px, -6px);
+    box-shadow: 8px 8px 0px var(--retro-dark);
+    border-color: var(--retro-navy);
   }
   
   /* Pseudo-element overlay to dim the grid so text stays readable */
