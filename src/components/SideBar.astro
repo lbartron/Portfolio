@@ -1,6 +1,11 @@
 ---
 import ToggleTheme from '../components/ToggleTheme.astro';
 import { Icon } from "astro-icon/components";
+import { Image } from 'astro:assets';
+
+import projectsIcon from '/src/assets/images/projects.png';
+import notesIcon from '/src/assets/images/notes.png';
+import aboutIcon from '/src/assets/images/about-me.png';
 ---
 
 <aside class = sidebar>
@@ -23,15 +28,15 @@ import { Icon } from "astro-icon/components";
   <section class = sidebar-section>
     <nav class = sidebar-nav-links>
       <a href = "/projects/">
-        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>
+        <Image src={projectsIcon} alt = "Projects image" class = "sidebar-nav-icon"/>
         Projects
       </a>
       <a href = "/notes/">
-        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>
+        <Image src={notesIcon} alt = "Notes image"  class = "sidebar-nav-icon"/>
         Notes
       </a>
       <a href = "/about/">
-        <Icon name="placeholder-icon" class = "sidebar-nav-icon"/>        
+        <Image src={aboutIcon} alt = "About me image"  class = "sidebar-nav-icon"/>        
         About Me
       </a>
     </nav>
@@ -67,7 +72,6 @@ import { Icon } from "astro-icon/components";
     flex-shrink: 0;
     top: 0;
     left: 0;
-    /* display: block; */
     height: 100vh;
     position: sticky;
     overflow-y: auto;
@@ -79,7 +83,6 @@ import { Icon } from "astro-icon/components";
 
   .sidebar-section{
     border-bottom: 1px solid var(--border-color);
-    /* padding: 15px 20px; */
     padding-bottom: 10px;
     margin: 1.25rem;
   }
@@ -116,9 +119,10 @@ import { Icon } from "astro-icon/components";
   }
 
   .sidebar-nav-icon{
-    font-size: 24px;
     margin-right: 10px;
     border: none;
+    width: 32px;
+    height: 32px;
   }
 
   .sidebar-connection-links{
