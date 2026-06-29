@@ -6,20 +6,45 @@ import Footer from '../components/Footer.astro';
 // Get recent notes/projects
 import { getCollection } from 'astro:content';
 import ProjectTile from '../components/ProjectTile.astro';
+import NoteTile from '../components/NoteTile.astro';
 
 const allProjects = await getCollection('projects');
 const featuredProjects = allProjects.filter(p => p.data.featured);
+
+const allNotes = await getCollection('notes');
+const sortedNotes = allNotes.sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+const recentNotes = sortedNotes.slice(0, 5);
+
+import homeImage from '../assets/images/HomeImage.jpg';
 ---
 
 <BaseLayout pageTitle="Home">
-  <!-- Everything here gets injected into the <slot /> of BaseLayout -->
   <div class = "layout">
     <SideBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div class = "hero">
-          <h1>Hi, I'm Leo!</h1>
-          <p>This is a little information about me</p>
+          <div class = hero-text-container>
+            <h1 class = retro-text>Hi, I'm Leo!</h1>
+            <p class = hero-text>
+              I'm a software engineer and student at UW Bothell building 
+              <span class="highlight-blue"> intelligent systems </span> and 
+              <span class="highlight-green"> local-first architecture </span>. 
+            </p>
+            <a href="/about" class="retro-link">More About Me &rarr;</a>
+            <p class = hero-text>
+              I enjoy building projects with the goal of learning new things.
+              This is some extra text to take up space in this section. 
+              I need this so I can figure out proper page layouts
+            </p>
+          </div>
+          <div class = hero-image-container>
+            <img class = hero-image src={homeImage.src} alt="Hero Image">
+          </div>
         </div>
         <div class = main-content-section>
           <h2>Projects</h2>
@@ -40,9 +65,16 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
         </div>
         <div class = main-content-section>
           <h2>Notes</h2>
-        </div>
-        <div class = main-content-section>
-          <h2>Recent Activity</h2>
+          <div class = note-list>
+            {recentNotes.map((note) => (
+              <NoteTile
+                title = {note.data.title}
+                description = {note.data.description}
+                slug = {note.id}
+                date = {note.data.date}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <Footer/>
@@ -52,19 +84,68 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
 
 
 <style>
-  .main-content-wrapper h1{
-    font-size: 48px;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
 
-  .main-content-wrapper h2{
+  .main-content-wrapper h2 {
     font-size: 32px;
   }
 
-  .projects-grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+  .hero {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
   }
+
+  .hero-text-container {
+    flex: 1 1 60%; 
+  }
+
+  .hero-image-container {
+    position: relative;
+    flex: 0 0 40%;
+    aspect-ratio: 1/1;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero-image:hover {
+    transform: translateY(4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--retro-dark);
+  }
+
+  /* \.hero-image-container:before {
+    content: '';
+    position: absolute;
+    background-color: var(--accent);
+    width: 100%;
+    height: 100%;
+    left: -10px;
+    top: 10px;
+    z-index: -1;
+  } */
+
+
+
+  /* .note-list .main-content-link {
+    margin-bottom: 2.5rem;
+  } */
 
   /* Temporary media setting to stack grid tiles to 
      single column on small screens */
@@ -72,5 +153,18 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
     .projects-grid {
       grid-template-columns: 1fr;
     }
+
+    .hero {
+      flex-direction: column-reverse; /* Puts text on top, image on bottom for mobile */
+      gap: 2rem;
+    }
+  
+    .hero-image-wrapper {
+      flex: 0 0 auto;
+      width: 100%;
+      /* Change to a widescreen aspect ratio so it doesn't take up the whole phone screen */
+      aspect-ratio: 16 / 9; 
+    }
+
   }
 </style>
