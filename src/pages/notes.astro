@@ -37,12 +37,12 @@ const sortedYears = Object.keys(groupedNotes).sort((a, b) => {
     <div class = main-container>
       <div class = main-content-wrapper>
         <div>
-          <h1>Notes</h1>
+          <h1 class = retro-text>Notes</h1>
           <p class = hero-text>These are some notes about anything ranging from technical work to personal interests</p>
           {/* Dynamically render grouped years and their respective notes */}
           {sortedYears.map((year) => (
             <div class="main-content-section">
-              <h2>{year}</h2>
+              <h2 class = flat-retro-text>{year}</h2>
               <div class="note-list">
                 {groupedNotes[year].map((note) => (
                 <NoteTile
