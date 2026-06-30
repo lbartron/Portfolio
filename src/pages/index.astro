@@ -19,7 +19,11 @@ const sortedNotes = allNotes.sort((a, b) => {
 });
 const recentNotes = sortedNotes.slice(0, 5);
 
+import { Image } from 'astro:assets';
 import homeImage from '../assets/images/HomeImage.jpg';
+import projectsIcon from '/src/assets/images/projects.png';
+import notesIcon from '/src/assets/images/notes.png';
+import aboutIcon from '/src/assets/images/about-me.png';
 ---
 
 <BaseLayout pageTitle="Home">
@@ -47,7 +51,10 @@ import homeImage from '../assets/images/HomeImage.jpg';
           </div>
         </div>
         <div class = main-content-section>
-          <h2>Projects</h2>
+          <span class = content-header>
+            <Image src={projectsIcon} alt = "Projects image" class = "content-header-icon"/>
+            <h2 class = flat-retro-text>Projects</h2>
+          </span>
           <div class="projects-grid">
             {featuredProjects.map((project) => (
               <ProjectTile 
@@ -64,7 +71,10 @@ import homeImage from '../assets/images/HomeImage.jpg';
           </div>
         </div>
         <div class = main-content-section>
-          <h2>Notes</h2>
+          <span class = content-header>
+            <Image src={notesIcon} alt = "Notes image" class = "content-header-icon"/>
+            <h2 class = flat-retro-text>Notes</h2>
+          </span>
           <div class = note-list>
             {recentNotes.map((note) => (
               <NoteTile
@@ -84,34 +94,68 @@ import homeImage from '../assets/images/HomeImage.jpg';
 
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+  .content-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-  .main-content-wrapper h2 {
-    font-size: 32px;
+  .content-header-icon{
+    margin-right: 10px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .hero-text-container .retro-text {
+    /* Scale from 2.2rem on mobile to 3.5rem on large desktops */
+    font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+    line-height: 1.1;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text-container .hero-text {
+    /* Scale body text to stay readable */
+    font-size: clamp(1rem, 1.5vw + 0.5rem, 1.15rem);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-text-container .retro-link {
+    margin-bottom: 1.5rem;
   }
 
   .hero {
     display: flex;
     flex-direction: row;
-    gap: 3rem;
+    /* gap: 4rem; */
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: center;
     margin-bottom: 4rem;
+    flex-wrap: wrap;
   }
 
   .hero-text-container {
-    flex: 1 1 60%; 
+    flex: 1 1 50%; 
+    min-width: 280px;
   }
 
   .hero-image-container {
     position: relative;
-    flex: 0 0 40%;
+    flex: 0 0 auto;
+    width: 100%;
+
+    max-width: clamp(260px, 35%, 380px); 
     aspect-ratio: 1/1;
     z-index: 1;
-  }
 
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
+    /* Styling like printed photo */
+    padding: 12px 12px 35px 12px; /* Thick bottom border like a polaroid */
+    background: light-dark(#fdfdfd, #d8d8d8); /* Physical paper color */
+    border: 1px solid var(--border-color);
+    box-shadow: 6px 6px 0px var(--retro-dark);
+    transform: rotate(3deg); /* Photo card tilt */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .hero-image {
@@ -130,23 +174,6 @@ import homeImage from '../assets/images/HomeImage.jpg';
     border-color: var(--retro-dark);
   }
 
-  /* \.hero-image-container:before {
-    content: '';
-    position: absolute;
-    background-color: var(--accent);
-    width: 100%;
-    height: 100%;
-    left: -10px;
-    top: 10px;
-    z-index: -1;
-  } */
-
-
-
-  /* .note-list .main-content-link {
-    margin-bottom: 2.5rem;
-  } */
-
   /* Temporary media setting to stack grid tiles to 
      single column on small screens */
   @media (max-width: 768px) {
@@ -158,12 +185,20 @@ import homeImage from '../assets/images/HomeImage.jpg';
       flex-direction: column-reverse; /* Puts text on top, image on bottom for mobile */
       gap: 2rem;
     }
-  
-    .hero-image-wrapper {
-      flex: 0 0 auto;
+
+    .hero-text-container {
+      text-align: center;
       width: 100%;
-      /* Change to a widescreen aspect ratio so it doesn't take up the whole phone screen */
-      aspect-ratio: 16 / 9; 
+    }
+  
+    .hero-image-container {
+      /* flex: 0 0 auto;
+      width: 100%; */
+
+      max-width: clamp(250px, 70%, 350px);
+      aspect-ratio: 1 / 1; 
+      margin: 0 auto; /* Center the photo */
+      transform: rotate(-2deg);
     }
 
   }
