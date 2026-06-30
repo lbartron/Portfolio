@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SideBar from '../components/SideBar.astro';
+import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
 import NoteTile from '../components/NoteTile.astro';
 
@@ -34,6 +35,7 @@ const sortedYears = Object.keys(groupedNotes).sort((a, b) => {
 <BaseLayout pageTitle="Notes">
   <div class = "layout">
     <SideBar/>
+    <NavBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div>

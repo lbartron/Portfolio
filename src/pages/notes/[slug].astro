@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SideBar from '../../components/SideBar.astro';
+import NavBar from '../../components/NavBar.astro';
 import Footer from '../../components/Footer.astro';
 import 'katex/dist/katex.min.css'
 
@@ -27,6 +28,7 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
 <BaseLayout pageTitle={entry.data.title || "Note"}>
   <div class="layout">
     <SideBar />
+    <NavBar/>
     <div class="main-container">
       <div class="main-content-wrapper note-page-wrapper">
         

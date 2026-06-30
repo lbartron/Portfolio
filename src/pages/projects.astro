@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SideBar from '../components/SideBar.astro';
+import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
 
 import { getCollection } from 'astro:content';
@@ -12,6 +13,7 @@ const allProjects = await getCollection('projects');
 <BaseLayout pageTitle="Projects">
   <div class = "layout">
     <SideBar/>
+    <NavBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div class = main-content-section>

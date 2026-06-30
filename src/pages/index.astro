@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SideBar from '../components/SideBar.astro';
+import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
 
 // Get recent notes/projects
@@ -29,6 +30,7 @@ import aboutIcon from '/src/assets/images/about-me.png';
 <BaseLayout pageTitle="Home">
   <div class = "layout">
     <SideBar/>
+    <NavBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div class = "hero">
@@ -177,10 +179,6 @@ import aboutIcon from '/src/assets/images/about-me.png';
   /* Temporary media setting to stack grid tiles to 
      single column on small screens */
   @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-
     .hero {
       flex-direction: column-reverse; /* Puts text on top, image on bottom for mobile */
       gap: 2rem;
@@ -200,6 +198,5 @@ import aboutIcon from '/src/assets/images/about-me.png';
       margin: 0 auto; /* Center the photo */
       transform: rotate(-2deg);
     }
-
   }
 </style>
