@@ -192,3 +192,23 @@ a:hover {
   transform: translate(8px, 8px);
   text-shadow: none;
 }
+
+@media (max-width: 768px) {
+  /* Stack the layout vertically when the top navbar activates */
+  .layout {
+    flex-direction: column;
+  }
+
+  /* Reduce side padding on mobile */
+  .main-content-wrapper {
+    padding: 20px 1.5rem; 
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .main-content-wrapper {
+    background-image: none;
+  }
+}
