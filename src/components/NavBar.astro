@@ -1,0 +1,106 @@
+---
+import ToggleTheme from '../components/ToggleTheme.astro';
+---
+
+<nav class = navbar>
+  <section class = navbar-section>
+    <div class = navbar-toggles>
+      <a href = "/" class = home-link>
+        <h2> Leo Bartron </h2>
+      </a>
+      <ToggleTheme/>
+    </div>
+  </section>
+  <section class = navbar-section>
+    <nav class = navbar-nav-links>
+      <a href = "/projects/">
+        Projects
+      </a>
+      <a href = "/notes/">
+        Notes
+      </a>
+      <a href = "/about/">
+        About
+      </a>
+    </nav>
+  </section>
+</nav>
+
+<style>
+  .navbar{
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 50px;
+    position: sticky;
+    z-index: 2;
+
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+
+    /* Bottom Border */
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar > div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+  }
+
+  .navbar-section{
+    /* border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin: 1.25rem; */
+  }
+
+  .navbar-toggles{
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .home-link{
+    text-decoration: none;
+    color: var(--text-main);
+  }
+
+  .navbar-nav-links{
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .navbar-nav-links a{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-main);
+  }
+
+  .navbar-nav-icon{
+    margin-right: 10px;
+    border: none;
+    width: 32px;
+    height: 32px;
+  }
+
+  .navbar h2{
+    margin: 0;
+    font-size: 18px;
+  }
+
+  /* Show on mobile screens */
+  @media (max-width: 768px) {
+    .navbar {
+      display: flex;
+    }
+  }
+</style>
