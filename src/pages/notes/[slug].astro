@@ -21,8 +21,21 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 
-// Filter out h1 (remove page title) and only keep h2 and h3 for cleaner ToC
+// Only keep h2 and h3 for cleaner ToC
 const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
+
+// Get word count and create time to read
+const plainText: string = entry.body ?? "";
+
+const cleanText = plainText
+  .replace(/!\[.*?\]\(.*?\)/g, '') // Remove markdown images
+  .replace(/\[.*?\]\(.*?\)/g, '')  // Remove markdown links
+  .replace(/```[\s\S]*?```/g, '');  // Remove code blocks
+
+// Get words
+const words = cleanText.split(/\s+/).filter(word => word.length > 0);
+const wordCount = words.length;
+const ttr = Math.ceil(wordCount / 200);
 ---
 
 <BaseLayout pageTitle={entry.data.title || "Note"}>
@@ -33,10 +46,13 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
       <div class="main-content-wrapper note-page-wrapper">
         
         <!-- Left Side Note Content -->
-        <article class="project-content">
-          <header class="project-header">
+        <article class="note-content">
+          <header class="note-header">
             <h1>{entry.data.title || "Untitled Note"}</h1>
-            {entry.data.description && <p class="description">{entry.data.description}</p>}
+            <span class = description-wrapper>
+              {entry.data.description && <p class="description">{entry.data.description}</p>}
+              <p class = description>{ttr} Minute Read</p>
+            </span>
           </header>
           
           <div class="markdown-content prose dark:prose-invert">
@@ -49,9 +65,9 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
           <div class="sticky-sidebar-content">
 
             <!-- Initial Graph View Container -->
-            <div class="graph-placeholder">
+            <!-- <div class="graph-placeholder">
               <span class="graph-label">Graph View (Coming Soon)</span>
-            </div>
+            </div> -->
 
             <!-- Table of Contents -->
             {tocHeadings.length > 0 && (
@@ -79,6 +95,11 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
 
 <style>
   /* Split the main wrapper into a 2-column grid for the note and sidebar */
+  .note-content {
+    min-width: 0; 
+    width: 100%;
+  }
+
   .note-page-wrapper {
     display: grid;
     grid-template-columns: 1fr 280px;
@@ -86,10 +107,25 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
     align-items: start;
   }
 
-  .project-header {
+  .note-header {
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1.5rem;
+  }
+
+  .note-header h1{
+    font-size: 2.5rem;
+  }
+
+  .description {
+    color: var(--text-muted);
+  }
+
+  .description-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
   }
 
   .markdown-content {
@@ -156,6 +192,31 @@ const tocHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
     color: var(--text-muted);
     font-family: var(--font-display);
     font-size: 0.9rem;
+  }
+
+  /* MD content styling */
+  .markdown-content {
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  /* Handle code blocks and math equations */
+  .markdown-content pre, 
+  .markdown-content .math {
+    /* If a code block or equation is too wide give it an internal scrollbar */
+    max-width: 100%;
+    overflow-x: auto;
+    
+    /* Subtle border to indicate it's a scrollable container */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+  
+  .markdown-content img {
+     max-width: 100%;
+     height: auto;
   }
 
   /* Initial responsive design */
