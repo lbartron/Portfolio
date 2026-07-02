@@ -11,7 +11,7 @@ import aboutIcon from '/src/assets/images/about-me.png';
 <aside class = sidebar>
   <section class = sidebar-section>
     <div class = sidebar-toggles>
-      <a href = "/" class = home-link>
+      <a href = {`${import.meta.env.BASE_URL}/`} class = home-link>
         <h2> Leo Bartron </h2>
       </a>
       <ToggleTheme/>
@@ -27,15 +27,15 @@ import aboutIcon from '/src/assets/images/about-me.png';
   </section>
   <section class = sidebar-section>
     <nav class = sidebar-nav-links>
-      <a href = "/projects/">
+      <a href = {`${import.meta.env.BASE_URL}projects/`}>
         <Image src={projectsIcon} alt = "Projects image" class = "sidebar-nav-icon"/>
         Projects
       </a>
-      <a href = "/notes/">
+      <a href = {`${import.meta.env.BASE_URL}notes/`}>
         <Image src={notesIcon} alt = "Notes image"  class = "sidebar-nav-icon"/>
         Notes
       </a>
-      <a href = "/about/">
+      <a href = {`${import.meta.env.BASE_URL}about/`}>
         <Image src={aboutIcon} alt = "About me image"  class = "sidebar-nav-icon"/>        
         About Me
       </a>

@@ -10,7 +10,7 @@ const {
 <div class="blueprint-background-container" style={`--project-color: ${themeColor};`}>
     <div class="glass-card">
     {/*Link title to project page */}
-    <a href={`/projects/${slug}`} class="project-title">
+    <a href={`${import.meta.env.BASE_URL}projects/${slug}/`} class="project-title">
       <h3>{title}</h3>
     </a>
     

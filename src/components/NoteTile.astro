@@ -5,7 +5,7 @@ const {
 ---
 
 
-<a href={`/notes/${slug}`} class="paper-card">
+<a href={`${import.meta.env.BASE_URL}notes/${slug}/`} class="paper-card">
   <h3>{title}</h3>
   <p>{description}</p>
 </a>
