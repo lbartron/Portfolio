@@ -8,6 +8,9 @@ import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://lbartron.github.io',
+  base: '/Portfolio/',
+
   integrations: [
     icon({
       iconDir: 'src/assets/images',
@@ -22,6 +25,6 @@ export default defineConfig({
       type: 'shiki',
       excludeLangs: ['mermaid'], // Prevents Astro from highlighting Mermaid code
     },
-    rehypePlugins: [rehypeMermaid], // Adds the diagram tool
+    rehypePlugins: [rehypeMermaid],
   },
 });
