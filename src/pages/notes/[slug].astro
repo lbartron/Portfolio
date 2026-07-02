@@ -102,7 +102,8 @@ const ttr = Math.ceil(wordCount / 200);
 
   .note-page-wrapper {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    /* grid-template-columns: 1fr 280px; */
+    grid-template-columns: 4fr 1fr;
     gap: 3rem;
     align-items: start;
   }
@@ -138,7 +139,7 @@ const ttr = Math.ceil(wordCount / 200);
     top: 2rem; /* How far from the top of the screen it sticks */
   }
 
-  /* ToC Styling */
+  /* ToC Styling */  
   .toc-container h3 {
     font-size: 1.1rem;
     color: var(--retro-navy);
