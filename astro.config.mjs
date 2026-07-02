@@ -10,6 +10,7 @@ import rehypeMermaid from 'rehype-mermaid';
 export default defineConfig({
   site: 'https://lbartron.github.io',
   base: '/Portfolio/',
+  trailingSlash: 'always',
 
   integrations: [
     icon({
