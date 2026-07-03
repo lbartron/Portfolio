@@ -5,7 +5,7 @@ import ToggleTheme from '../components/ToggleTheme.astro';
 <nav class = navbar>
   <section class = navbar-section>
     <div class = navbar-toggles>
-      <a href = "/" class = home-link>
+      <a href = {`${import.meta.env.BASE_URL}`} class = home-link>
         <h2> Leo Bartron </h2>
       </a>
       <ToggleTheme/>
@@ -13,13 +13,13 @@ import ToggleTheme from '../components/ToggleTheme.astro';
   </section>
   <section class = navbar-section>
     <nav class = navbar-nav-links>
-      <a href = "/projects/">
+      <a href = {`${import.meta.env.BASE_URL}projects/`}>
         Projects
       </a>
-      <a href = "/notes/">
+      <a href = {`${import.meta.env.BASE_URL}notes/`}>
         Notes
       </a>
-      <a href = "/about/">
+      <a href = {`${import.meta.env.BASE_URL}about/`}>
         About
       </a>
     </nav>
