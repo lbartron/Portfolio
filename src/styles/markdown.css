@@ -1,0 +1,79 @@
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  
+  /* Force wide tables to scroll horizontally */
+  display: block; 
+  overflow-x: auto;
+  
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+/* Header and Cell Padding */
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem; 
+  text-align: left;
+  min-width: 120px; /* Ensures columns don't crush too small */
+}
+
+/* Table Header Styling */
+.markdown-content th {
+  background-color: light-dark(rgba(0,0,0,0.03), rgba(255,255,255,0.05));
+  font-weight: 700;
+}
+
+/* Alternating row colors for readability */
+.markdown-content tr:nth-child(even) {
+  background-color: light-dark(rgba(0,0,0,0.01), rgba(255,255,255,0.02));
+}
+
+/* Prevent equation from overflowing */
+.markdown-content .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  
+  /*Adding padding prevents the scrollbar from cutting hanging content off */
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Arrows and Lines */
+.markdown-content svg .edgePath path,
+.markdown-content svg path.transition,
+.markdown-content svg path.transition,
+.markdown-content svg .transition path,
+.markdown-content svg .messageLine0,
+.markdown-content svg .messageLine1 {
+  stroke: var(--text-main) !important;
+  fill: none !important;
+}
+
+/* Arrowheads */
+.markdown-content svg marker path {
+  fill: var(--text-main) !important;
+  stroke: none !important;
+}
+
+/* Sequence Diagram Lifelines */
+.markdown-content svg .actor-line {
+  stroke: var(--border-color) !important;
+  stroke-width: 2px !important;
+}
+
+/* Broad rules to try to target all mermaid elements to follow light / dark */
+:root {
+  --mermaid-filter: light-dark(none, invert(1) hue-rotate(180deg));
+}
+
+.markdown-content > svg,
+.markdown-content > svg[id^="mermaid-"] > * {
+  filter: var(--mermaid-filter) !important;
+  color: var(--text-main) !important;
+  fill: var(--text-main) !important;
+}
