@@ -1,39 +1,72 @@
 ---
-
 ---
 
 <footer class = "footer">
-  <section class = footer-section>
-    <nav class = footer-links>
-      <a href = "https://github.com/lbartron">
-        GitHub
-      </a>
-      <a href = "https://www.linkedin.com/in/leo-bartron">
-        LinkedIn
-      </a>
-    </nav>
-    <p> Made by Leo Bartron </p>
+  <section class = footer-wrapper>
+    <div class = footer-section>
+      <nav class = footer-links>
+        <a href = "https://github.com/lbartron">
+          GitHub
+        </a>
+        <a href = "https://www.linkedin.com/in/leo-bartron">
+          LinkedIn
+        </a>
+      </nav>
+      <p> Made by Leo Bartron </p>
+    </div>
   </section>
 </footer>
 
 <style>
-  .footer-section{
+  .footer-wrapper{
     border-top: 1px solid var(--border-color);
     padding-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-top: 3rem;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+
+  .footer-section:last-child {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .footer-section p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 300px;
+    margin: 0;
   }
 
   .footer-links{
     align-items: flex-start;
     display: flex;
     flex-direction: row;
+    gap: 1rem;
   }
 
   .footer-links a{
-    padding-top: 3rem;
-    padding-bottom: 0.5rem;
-    padding-right: 10px;
     display: flex;
-    align-items: center;
     color: var(--text-main);
+    font-weight: 500;
+    margin-bottom: 13px;
+  }
+
+  @media (max-width: 768px){
+    .footer-wrapper {
+      padding: 0 0 0 2rem;
+    }
   }
 </style>
