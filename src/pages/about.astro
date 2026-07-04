@@ -1,36 +1,110 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SideBar from '../components/SideBar.astro';
+import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
 
+import Timeline from '../components/Timeline.astro';
+import timelineData from '../content/data/timeline.json';
+
+import SkillsList from '../components/SkillsList.astro';
+import skillsData from '../content/data/skills.json';
 ---
 
 <BaseLayout pageTitle="About">
   <div class = "layout">
     <SideBar/>
+    <NavBar/>
     <div class = main-container>
       <div class = main-content-wrapper>
         <div class = main-content-section>
-          <p>
+          <h1 class = retro-text>About Me</h1>
+          <p class = about-text>
               I'm Leo, a Computer Science and Software Engineering student at the University
               Of Washington Bothell. I started my coding journey by learning the basics of
               HTML, CSS, and JavaScript, which later led me to explore more advanced languages 
               like C++ and Python. My goal is to become a full stack developer with a focus on database management and engineering.
           </p>
-          <p>
+          <p class = about-text>
               I aim to use my creative drive and logical approach to problem solving in order to become
               a developer who writes meaningful code-solutions that not only function well but have a positive
               impact on society.
           </p>
-          <p>
+          <p class = about-text>
               Even from a young age, I've been fascinated by how things are made. I would often look
               around and wonder how things were built or even how they could be improved. Today,
               I apply this same sense of curiosity and attention to detail to the porjects I build, always
               thinking about how functionality, design, and user experience can be refined. 
           </p>
         </div>
+        <h2 class = flat-retro-text>Journey</h2>
+        <div class = main-content-section>
+          <div class = about-grid>
+            <div class = timeline-stack>
+              <Timeline title="Career" color="var(--retro-red)" events={timelineData.careerEvents} />
+              <Timeline title="Education" color="var(--retro-orange)" events={timelineData.educationEvents} />
+            </div>
+            <Timeline title="Extras" color="var(--retro-orange)" events={timelineData.extraEvents} />
+          </div>
+        </div>
+        <h2 class = flat-retro-text>Skills</h2>
+        <div class = main-content-section>
+          <div class = skills-wrapper>
+            <SkillsList 
+              title="Backend Frameworks & Tools" 
+              description="The primary tools and frameworks I use for backend development. Most of these have been directly used in previous and current works."
+              skills={skillsData.backend} 
+              textPosition="left"
+            />
+
+            <SkillsList
+              title="Frontend & UI Tools" 
+              description="A list of things I use for front end development, mainly centered around frameworks for interacting with scripting and styling."
+              skills={skillsData.frontend} 
+              textPosition="right"
+            />
+
+            <SkillsList
+              title="Tools & Extras" 
+              description="Some of the extra tools I use for things like communication, design, and setting up my development environment."
+              skills={skillsData.tools} 
+              textPosition="left"
+            />
+          </div>
+        </div>
       </div>
     <Footer/>
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    max-width: 1000px;
+    gap: 1rem;
+    align-items: start;
+    height: fit-content;
+  }
+
+  .timeline-stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline-stack .timeline-container {
+    height: 100%;
+  }
+
+  .skills-wrapper {
+    padding-top: 5rem;
+    /* Hack to prevent crazy padding that all rows use for folder animation */
+    margin-bottom: -7rem;
+  }
+
+  .about-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+</style>
