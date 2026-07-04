@@ -1,0 +1,209 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  skills: string[];
+  textPosition: "left" | "right";
+}
+
+const { title, description, skills = [], textPosition = "left"} = Astro.props;
+---
+
+<div class={`skills-row layout-text-${textPosition}`}>
+  
+  <div class="skills-text">
+    <h3>{title}</h3>
+    <p class = hero-text>{description}</p>
+  </div>
+
+  <div class="folder-wrapper">
+    <div class="folder-back"></div>
+
+    <div class="folder-pages">
+      <div class="page paper-card">
+        <div class="skill-wrapper">
+          {skills.map((skill) => (
+            <span class="tape-tag">>{skill}</span>
+          ))}
+        </div>
+      </div>
+      <div class="page decorative-page-1"></div>
+      <div class="page decorative-page-2"></div>
+    </div>
+
+    <div class="folder-front"></div>
+  </div>
+
+</div>
+
+<style>
+  .skills-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1000px; 
+    margin: 0 auto 8rem 0; 
+    align-items: start;
+  }
+
+  .skills-text { max-width: 45ch; }
+
+  .layout-text-left .skills-text { 
+    justify-self: start;
+    text-align: left;
+  }
+
+  .layout-text-right .skills-text { 
+    order: 2;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .layout-text-right .folder-wrapper { 
+    order: 1;
+  }
+
+  /* Folder Styling */
+  .folder-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 280px;
+    perspective: 1500px; 
+    
+    transform-style: preserve-3d; 
+    
+    cursor: pointer;
+    margin: 0 auto;
+  }
+
+  .folder-front, .folder-back {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--text-main);
+    border-radius: 4px;
+  }
+
+  .folder-front {
+    background: var(--retro-yellow, #e8d08c);
+    /* Set slightly higher in 3D space so it sits in front */
+    transform: translateZ(1px); 
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: bottom center; 
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .folder-back {
+    background: #cba85a;
+    /* Set slightly lower in 3D space */
+    transform: translateZ(-1px); 
+    z-index: 1;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+  }
+
+  /* Folder tab */
+  .folder-front::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    width: 120px;
+    height: 20px;
+    background: var(--retro-orange, #e8d08c);
+    border: 2px solid var(--text-main);
+    border-bottom: none;
+  }
+
+  .layout-text-left .folder-front::before {
+    right: 20px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .layout-text-right .folder-front::before {
+    left: 20px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Folder page styling */
+  .folder-pages .page {
+    position: absolute;
+    inset: 8px; 
+    background: var(--bg-color);
+    border: 2px solid var(--text-main);
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .decorative-page-1 { background: #f9f9f9 !important; }
+  .decorative-page-2 { background: #f1f1f1 !important; }
+
+  .skill-wrapper {
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-content: flex-start;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .folder-wrapper:hover .folder-front {
+    transform: translateZ(1px) rotateX(-35deg); 
+  }
+
+  /* Main content slides straight up */
+  .folder-wrapper:hover .page:nth-child(1) {
+    transform: translateY(-120px);
+  }
+
+  /* Page 1 fan right */
+  .folder-wrapper:hover .page:nth-child(2) {
+    transform: translate(25px, -65px) rotate(4deg);
+  }
+  
+  /* Page 2 fan left */
+  .folder-wrapper:hover .page:nth-child(3) {
+    transform: translate(-25px, -45px) rotate(-3deg);
+  }
+
+  .folder-pages .page:nth-child(1) { z-index: 4; }
+  .folder-pages .page:nth-child(2) { z-index: 3; }
+  .folder-pages .page:nth-child(3) { z-index: 2; }
+
+  .tape-tag {
+    /* background: rgba(255, 255, 230, 0.95); Light paper color backup option */
+    background: var(--retro-yellow);
+    color: #333;
+    padding: 4px 12px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    clip-path: polygon(2% 0, 100% 2%, 98% 100%, 0 98%);
+    display: inline-block; /* Need for flex layout in page */
+  }
+  
+  /* Alternate rotation for scattered effect */
+  .tape-tag:nth-child(even) {
+    transform: rotate(2deg);
+  }
+  .tape-tag:nth-child(odd) {
+    transform: rotate(-1deg);
+  }
+
+  @media (max-width: 768px) {
+    .skills-row { 
+      grid-template-columns: 1fr; 
+      gap: 2rem; 
+    }
+    .layout-text-left .skills-text,
+    .layout-text-right .skills-text { 
+      justify-self: center;
+      text-align: center;
+      order: 0; 
+    }
+    .layout-text-right .folder-wrapper { order: 1; }
+  }
+</style>
