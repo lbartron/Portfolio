@@ -1,0 +1,5 @@
+{
+  "backend": ["Python", "C++", "FastAPI", "SQLite", "Local MCP"],
+  "frontend": ["Astro", "React", "TypeScript", "Tailwind CSS"],
+  "tools": ["Git", "Docker", "VS Code", "Figma"]
+}

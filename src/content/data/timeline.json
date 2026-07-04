@@ -1,0 +1,44 @@
+{
+  "careerEvents": [
+    {
+      "date": "Oct 2024 - Current",
+      "title": "Student Technology Consultant",
+      "description": "Consult with students to understand technology-based problems to provide effective solutions.",
+      "color": "var(--retro-yellow)"
+    }
+  ],
+  "educationEvents": [
+    {
+      "date": "Sep 2023 - Current",
+      "title": "University of Washington Bothell",
+      "description": "B.S. Computer Science and Software Engineering.",
+      "color": "var(--retro-orange)"
+    },
+    {
+      "date": "May 2023",
+      "title": "Kamiak Highschool",
+      "description": "High School Diploma.",
+      "color": "var(--retro-red)"
+    }
+  ],
+    "extraEvents": [
+    {
+      "date": "May 2026",
+      "title": "IBM Quantum Hackathon",
+      "description": "Investigated whether quantum data encoding and quantum kernels could offer a substantial advantage over classical machine learning methods in sparse-data environments.",
+      "color": "var(--retro-orange)"
+    },
+    {
+      "date": "April 2026",
+      "title": "UWB Hacks 2026",
+      "description": "Develoepd LearnAI: a comprehensive, responsive educational platform dedicated to teaching artificial intelligence fundamentals to learners of all levels. The content is split into several interactive learning modules.",
+      "color": "var(--retro-red)"
+    },
+    {
+      "date": "April 2025",
+      "title": "UWB Hacks 2025",
+      "description": "Created a project that returns a lay summary of local, state, or national laws, and their sources, given a user query",
+      "color": "var(--retro-yellow)"
+    }
+  ]
+}
