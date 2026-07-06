@@ -172,27 +172,6 @@ const { title, description, skills = [], textPosition = "left"} = Astro.props;
   .folder-pages .page:nth-child(2) { z-index: 3; }
   .folder-pages .page:nth-child(3) { z-index: 2; }
 
-  .tape-tag {
-    /* background: rgba(255, 255, 230, 0.95); Light paper color backup option */
-    background: var(--retro-yellow);
-    color: #333;
-    padding: 4px 12px;
-    font-family: monospace;
-    font-size: 0.9rem;
-    font-weight: bold;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-    clip-path: polygon(2% 0, 100% 2%, 98% 100%, 0 98%);
-    display: inline-block; /* Need for flex layout in page */
-  }
-  
-  /* Alternate rotation for scattered effect */
-  .tape-tag:nth-child(even) {
-    transform: rotate(2deg);
-  }
-  .tape-tag:nth-child(odd) {
-    transform: rotate(-1deg);
-  }
-
   @media (max-width: 768px) {
     .skills-row { 
       grid-template-columns: 1fr; 
