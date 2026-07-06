@@ -32,14 +32,12 @@ const { Content } = await render(entry);
         <article class="project-content">
           <header class="project-header">
             <h1>{entry.data.title}</h1>
-            <p class="description">{entry.data.description}</p>
             
-            <!-- Potential Tech Stack for each project page -->
-            <!-- <div class="tech-stack">
-              {entry.data.techStack.map((tech) => (
-                <span class="tag">{tech}</span>
+            <div class="tag-wrapper">
+              {entry.data.projectTags.map((tag) => (
+                <span class="tape-tag">{tag}</span>
               ))}
-            </div> -->
+            </div>
           </header>
           <!-- Markdown content is loaded here. Tailwind helps with text color theme -->
           <div class="markdown-content prose dark:prose-invert">
@@ -54,19 +52,18 @@ const { Content } = await render(entry);
 
 <style>
   .project-header {
-    margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1.5rem;
   }
-  
-  /* Potential CSS for Tech Stack tags */
-  /* .tag {
-    background: var(--sidebar-bg);
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    margin-right: 0.5rem;
-  } */
+
+  .tag-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-content: flex-start;
+    height: 100%;
+    overflow-y: auto;
+  }
 
   .markdown-content{
     margin: 0 auto;

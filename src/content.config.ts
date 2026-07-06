@@ -13,6 +13,7 @@ const projects = defineCollection({
     githubUrl: z.string(),
     detailsUrl: z.string(),
     devpostUrl: z.string(),
+    projectTags: z.array(z.string()).default([""]),
   }),
 });
 

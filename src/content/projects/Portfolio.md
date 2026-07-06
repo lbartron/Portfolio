@@ -7,6 +7,7 @@ liveUrl: ""
 githubUrl: "https://github.com/lbartron/Portfolio"
 detailsUrl: ""
 devpostUrl: ""
+projectTags: ["Astro", "Typescript", "Node JS"]
 ---
 
 My personal portfolio site. Built to be a place to share projects and a current set of technical notes from coursework and side reading.

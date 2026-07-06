@@ -7,6 +7,7 @@ liveUrl: ""
 githubUrl: "https://github.com/lbartron/Verlet"
 detailsUrl: ""
 devpostUrl: ""
+projectTags: ["Physics Simulation", "CMake", "C++", ""]
 ---
 # Project Highlights
 ### Key Features

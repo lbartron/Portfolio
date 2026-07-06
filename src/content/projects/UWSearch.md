@@ -7,6 +7,7 @@ liveUrl: ""
 githubUrl: "https://github.com/lbartron/UW-Campus-Search-Engine"
 detailsUrl: "https://lbartron.github.io/UW-Campus-Search-Engine/"
 devpostUrl: ""
+projectTags: ["NLP", "RSS Processing", "Data Embedding"]
 ---
 
 # Quick Start
