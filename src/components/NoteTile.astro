@@ -74,6 +74,14 @@ const formattedDate = date
   background: linear-gradient(225deg, transparent 50%, var(--retro-navy) 50%);
   border-bottom-left-radius: 4px;
   box-shadow: -2px 2px 4px rgba(0,0,0,0.1);
+
+  transform-origin: bottom left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.paper-card:hover::before {
+  transform: translate(-2px, -3px) rotate(5deg);
+  box-shadow: -4px 6px 10px rgba(0,0,0,0.28);
 }
 
 .paper-card:hover {
