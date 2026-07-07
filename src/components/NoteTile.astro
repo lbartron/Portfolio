@@ -2,12 +2,24 @@
 const { 
   title, description, 
   slug, date } = Astro.props;
+
+const formattedDate = date
+? new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+: null;
 ---
 
 
 <a href={`${import.meta.env.BASE_URL}notes/${slug}/`} class="paper-card">
   <h3>{title}</h3>
-  <p>{description}</p>
+  <span class = note-desc>
+    <p class = note-description>{description}</p>
+    <p class = note-date>{formattedDate}</p>
+  </span>
+  
 </a>
 
 <style>
@@ -74,5 +86,22 @@ const {
   color: var(--retro-navy);
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+.note-desc {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  justify-content: space-between;
+  color: var(--text-muted);
+}
+
+.note-description {
+  min-width: 0;
+}
+
+.note-date {
+  white-space: nowrap;
+  text-align: right;
+  align-self: start;
 }
 </style>
