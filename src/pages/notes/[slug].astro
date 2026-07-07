@@ -131,11 +131,26 @@ const ttr = Math.ceil(wordCount / 200);
   .sticky-sidebar-content {
     position: sticky;
     top: 2rem; /* How far from the top of the screen it sticks */
-    max-height: calc(100vh - 40px);
+    max-height: calc(100vh - 180px);
     overflow-y: auto;
+
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: light-dark(#c7baad4b, #4e4e4e81) light-dark(#fff4e95e, #38383881);
+    -ms-overflow-style: 8px; /* Internet Explorer/Edge */
+  }
+
+  .sticky-sidebar-content::-webkit-scrollbar {
+    width: 8px;
   }
 
   /* ToC Styling */  
+  .toc-container {
+    background-color: light-dark(#fff4e95e, #38383881);
+    border-left: 4px solid var(--retro-navy);
+    border-radius: 4px 0 0 4px;
+    padding: 1.25rem 1.25rem 1.25rem 1rem;
+  }
+
   .toc-container h3 {
     font-size: 1.1rem;
     color: var(--retro-navy);
