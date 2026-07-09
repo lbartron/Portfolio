@@ -97,10 +97,13 @@ const {
     /* Uses light-dark themes*/
     background: light-dark(rgba(255, 255, 255, 0.65), rgba(17, 17, 17, 0.75));
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     padding: 1.5rem;
     border-radius: 6px;
     border: 1px solid var(--border-color);
+    
+    /* Add support for all browsers */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px); 
   }
 
   /* TITLE STYLING */
