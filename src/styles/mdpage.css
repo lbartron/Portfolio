@@ -1,0 +1,169 @@
+.main-content-wrapper {
+  padding-right: 50px;
+}
+
+/* Split the main wrapper into a 2-column grid for the note and sidebar */
+.md-page-content {
+  min-width: 0; 
+  width: 100%;
+
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.md-page-wrapper {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 8rem;
+  row-gap: 0;
+}
+
+.md-page-header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.md-page-header h1{
+  font-size: 2.5rem;
+}
+
+.description {
+  color: var(--text-muted);
+}
+
+.description-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.markdown-content {
+  line-height: 1.6;
+}
+
+/* Sticky Right Sidebar */
+.md-page-sidebar {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.sticky-sidebar-content {
+  position: sticky;
+  top: 2rem; /* How far from the top of the screen it sticks */
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: light-dark(#c7baad4b, #4e4e4e81) light-dark(#fff4e95e, #38383881);
+  -ms-overflow-style: 8px; /* Internet Explorer/Edge */
+}
+
+.sticky-sidebar-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* ToC Styling */  
+.toc-container {
+  background-color: light-dark(#fff4e95e, #38383881);
+  /* border-left: 4px solid var(--retro-navy);
+  border-radius: 4px 0 0 4px; */
+  padding: 1.25rem 1.25rem 1.25rem 1rem;
+}
+
+.toc-container h3 {
+  font-size: 1.1rem;
+  color: var(--retro-navy);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-nav li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.toc-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.toc-nav a:hover {
+  color: var(--retro-orange);
+}
+
+.toc-nav a.active {
+  color: var(--retro-orange);
+}
+
+/* Indent H3s slightly to show hierarchy */
+.toc-level-3 {
+  padding-left: 1rem;
+}
+
+/* MD content styling */
+.markdown-content {
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Handle code blocks and math equations */
+.markdown-content pre, 
+.markdown-content .math {
+  /* If a code block or equation is too wide give it an internal scrollbar */
+  max-width: 100%;
+  overflow-x: auto;
+  
+  /* Subtle border to indicate it's a scrollable container */
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.markdown-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Initial responsive design */
+@media (max-width: 1024px) {
+  .md-page-wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .md-page-header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .md-page-sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 2rem;
+  }
+  .md-page-content {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .sticky-sidebar-content {
+    position: relative;
+    top: 0;
+
+    /* Show full TOC in mobile view */
+    max-height: 100%;
+    overflow-y: unset;
+  }
+}
