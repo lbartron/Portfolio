@@ -54,7 +54,8 @@ a:hover {
 }
 
 .main-content-wrapper{
-  padding: 25px 100px;
+  /* 30px ruler + 50px padding */
+  padding: 25px 50px 25px 80px; 
 
   background-image: 
       /* Smallest ticks (1/8 inch marks) */
