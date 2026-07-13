@@ -8,6 +8,8 @@ githubUrl: "https://github.com/BountyBro/uwbHacks2026"
 detailsUrl: ""
 devpostUrl: "https://devpost.com/software/tbd-nymx0o"
 projectTags: ["Python", "HTML", "Research"]
+spotlight: true
+image: "../../assets/images/LearnAI.png"
 ---
 
 ## Project Overview
