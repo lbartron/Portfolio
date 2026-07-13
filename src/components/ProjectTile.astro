@@ -1,20 +1,40 @@
 ---
+import { Image } from 'astro:assets';
+
 const { 
   title, description, 
   themeColor = "#0055ff", // Default fallback color
   slug, githubUrl, 
   liveUrl, detailsUrl,
-  devpostUrl } = Astro.props;
+  devpostUrl, image,
+  featured = false,
+  projectTags, } = Astro.props;
 ---
 
-<div class="blueprint-background-container" style={`--project-color: ${themeColor};`}>
-    <div class="glass-card">
+<div class= {` blueprint-background-container ${featured ? "is-featured" : ""} `}style={`--project-color: ${themeColor};`}>
+  <div class="glass-card">
+    {featured && <span class="featured-tag">Featured</span>}
+
     {/*Link title to project page */}
     <a href={`${import.meta.env.BASE_URL}projects/${slug}/`} class="project-title">
       <h3>{title}</h3>
     </a>
     
     <p class="project-desc">{description}</p>
+
+    {featured && projectTags && (
+      <div class="tag-wrapper">
+        {projectTags.map((tag: string)  => (
+          <span class="tape-tag">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    {featured && image && (
+      <div class="project-image">
+        <Image src={image} alt={`${title} screenshot`}  />
+      </div>
+    )}
     
     <!-- Project Buttons -->
     <div class="project-links">
@@ -161,5 +181,94 @@ const {
   .secondary-btn:hover {
     border-color: var(--project-color);
     color: var(--project-color);
+  }
+
+  /* Featured Project Styling */
+  .is-featured {
+    width: 100%;
+    height: auto;
+
+    /* Strip blueprint background */
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+
+  .is-featured::before {
+    content: none;
+  }
+
+  .is-featured.blueprint-background-container {
+    max-width: none;
+    overflow: visible;
+  }
+
+  .is-featured.blueprint-background-container:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 8px 8px 0px var(--retro-dark);
+    border-color: var(--retro-navy);
+  }
+
+  .is-featured .glass-card {
+    
+  }
+
+  .is-featured .glass-card .project-title h3{
+    font-size: 3rem;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+
+  .is-featured .glass-card .project-desc {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .featured-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    /* tape-tag styling */
+    background: var(--retro-yellow);
+    color: #333;
+    padding: 4px 12px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    transform: translate(-8px, -8px) rotate(-3deg);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    clip-path: polygon(2% 0, 100% 2%, 98% 100%, 0 98%);
+  }
+
+  .project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-content: flex-start;
+    height: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 700px) {
+    .is-featured .glass-card {
+      
+    }
   }
 </style>

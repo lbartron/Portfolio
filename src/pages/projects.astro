@@ -42,6 +42,7 @@ const spotlightProject = allProjects.find(p => p.data.spotlight);
                 detailsUrl={spotlightProject.data.detailsUrl}
                 devpostUrl={spotlightProject.data.devpostUrl}
                 image={spotlightProject.data.image}
+                projectTags={spotlightProject.data.projectTags}
                 featured={true}
               />
               }
@@ -89,5 +90,17 @@ const spotlightProject = allProjects.find(p => p.data.spotlight);
     grid-column: 1;
     grid-row: 2;
     width: 100%;
+  }
+
+  @media ( max-width: 768px ) {
+    .project-hero-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-rows: repeat(1fr);
+    }
+
+    .featured-project {
+      grid-column: auto; 
+      grid-row: auto;
+    }
   }
 </style>
