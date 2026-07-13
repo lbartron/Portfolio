@@ -1,0 +1,119 @@
+---
+
+---
+
+<div class = project-numbers>
+  <table class = project-numbers-table>
+    <tbody>
+      <tr>
+        <td>
+          <div class = pnt-cell>
+            <h2 class = pnt-cell-number>4</h2>
+            <p class = pnt-cell-desc>Projects</p>
+          </div>
+        </td>
+        <td>
+          <div class = pnt-cell>
+            <h2 class = pnt-cell-number>3</h2>
+            <p class = pnt-cell-desc>Hackathons</p>
+          </div>
+        </td>
+        <td>
+          <div class = pnt-cell>
+            <h2 class = pnt-cell-number>1k+</h2>
+            <p class = pnt-cell-desc>Events Indexed</p>
+          </div>
+        </td>
+        <td>
+          <div class = pnt-cell>
+            <h2 class = pnt-cell-number>2</h2>
+            <p class = pnt-cell-desc>Live Demos</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .project-numbers {
+    width: 100%;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .project-numbers-table {
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    table-layout: fixed;
+    width: 100%;
+    /* Force table to fit in box */
+    box-sizing: border-box;
+    background-color: light-dark(#fdfdfd, #2a2a2a);
+  }
+
+  .project-numbers-table td {
+    padding: 12px 15px; 
+    border-right: 1px solid var(--border-color);
+    text-align: center;
+    vertical-align: middle;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .project-numbers-table td:last-of-type {
+    border-right: none;
+  }
+
+  .project-numbers-table tbody tr td:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 4px 4px 0px var(--retro-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    border-color: var(--retro-navy);
+    cursor: pointer;
+  }
+
+  .project-numbers-table td:hover {
+    border-right-color: transparent;
+  }
+
+  .project-numbers-table td:has(+ td:hover) {
+    border-right-color: transparent;
+  }
+
+  .pnt-cell-number {
+    font-family: var(--font-display);
+  }
+
+  .project-numbers-table td:nth-child(1) .pnt-cell-number { color: var(--retro-navy); }
+  .project-numbers-table td:nth-child(2) .pnt-cell-number { color: var(--retro-orange); }
+  .project-numbers-table td:nth-child(3) .pnt-cell-number { color: var(--retro-red); }
+  .project-numbers-table td:nth-child(4) .pnt-cell-number { color: var(--retro-yellow); }
+
+  .pnt-cell-desc {
+    
+  }
+
+  @media(max-width: 786px) {
+    /* Need to make the pnt table viewable on mobile */
+    .project-numbers {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .pnt-cell-number {
+      font-size: 1.5rem;
+    }
+
+    .project-numbers-table td {
+      padding: 10px 12.5px; 
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .pnt-cell-desc {
+      font-size: .75rem
+    }
+  }
+</style>
