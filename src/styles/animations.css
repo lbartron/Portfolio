@@ -1,0 +1,27 @@
+/* Container for the dot and the pulse to keep them stacked */
+.status-indicator {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+/* Green dot for flashing green dot animation */
+.green-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* The expanding ring animation */
+.green-pulse {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  z-index: 1;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
