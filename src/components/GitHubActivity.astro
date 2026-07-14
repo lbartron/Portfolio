@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import "../styles/animations.css";
+
+const username = "lbartron";
+const projects = await getCollection('projects');
+
+// Map "owner/repo" -> themeColor for any project that has a GitHub URL,
+// so the build log reuses each project's existing accent color.
+const repoColors: Record<string, string> = {};
+for (const project of projects) {
+  if (project.data.githubUrl) {
+    try {
+      const { pathname } = new URL(project.data.githubUrl);
+      const [, owner, repo] = pathname.split("/");
+      if (owner && repo) {
+        repoColors[`${owner}/${repo}`] = project.data.themeColor;
+      }
+    } catch {
+      // Skip malformed URLs
+    }
+  }
+}
+---
+
+<div class="github-log" data-username={username} data-repo-colors={JSON.stringify(repoColors)}>
+  <div class="github-log-header">
+    <div class="status-indicator">
+      <div class="green-dot"></div>
+      <div class="green-pulse"></div>
+    </div>
+    <h3>Build log</h3>
+  </div>
+  <ul class="github-log-list" id="github-log-list">
+    <li class="github-log-loading">Loading recent commits…</li>
+  </ul>
+  <p class="github-log-footer">via GitHub Events API</p>
+</div>
+
+<style>
+  .github-log {
+
+  }
+
+  .github-log-header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .github-log-list {
+
+  }
+
+  .github-log-loading {
+
+  }
+
+  .github-log-footer {
+
+  }
+
+</style>
+
+<script src="../scripts/githubactivity.js"></script>
