@@ -39,26 +39,92 @@ for (const project of projects) {
 
 <style>
   .github-log {
-
+    grid-column: 2;
+    grid-row: 1 / -1;
+    /* width: 100%; */
+    height: auto;
+    background-color: light-dark(#fdfdfd, #2a2a2a);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
   }
 
   .github-log-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .github-log-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
   }
 
   .github-log-list {
-
-  }
-
-  .github-log-loading {
-
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .github-log-footer {
-
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
   }
 
+  /* Create global rules so injected content properly receives css rules */
+  :global(.github-log-item) {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  :global(.github-log-item:last-child) {
+    border-bottom: none;
+  }
+
+  :global(.repo-tag) {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  :global(.commit-message) {
+    display: block;
+    color: var(--text-main);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  :global(.commit-message:hover) {
+    color: var(--retro-red);
+    text-decoration: underline;
+  }
+
+  :global(.commit-meta) {
+    font-family: var(--font-terminal);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  :global(.github-log-loading) ,
+  :global(.github-log-error) {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .github-log {
+      grid-column: auto; 
+      grid-row: auto;
+    }
+  }
 </style>
 
 <script src="../scripts/githubactivity.js"></script>
