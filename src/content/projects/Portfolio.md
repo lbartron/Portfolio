@@ -3,7 +3,7 @@ title: "Portfolio"
 description: "My Portfolio page that you are currently viewing!"
 featured: true
 themeColor: "#bb1f1f"
-liveUrl: ""
+liveUrl: "https://lbartron.github.io/Portfolio/"
 githubUrl: "https://github.com/lbartron/Portfolio"
 detailsUrl: ""
 devpostUrl: ""

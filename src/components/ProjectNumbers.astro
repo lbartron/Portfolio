@@ -1,5 +1,5 @@
 ---
-
+const { projectCount, liveDemoCount } = Astro.props;
 ---
 
 <div class = project-numbers>
@@ -8,7 +8,7 @@
       <tr>
         <td>
           <div class = pnt-cell>
-            <h2 class = pnt-cell-number>4</h2>
+            <h2 class = pnt-cell-number>{projectCount}</h2>
             <p class = pnt-cell-desc>Projects</p>
           </div>
         </td>
@@ -26,7 +26,7 @@
         </td>
         <td>
           <div class = pnt-cell>
-            <h2 class = pnt-cell-number>2</h2>
+            <h2 class = pnt-cell-number>{liveDemoCount}</h2>
             <p class = pnt-cell-desc>Live Demos</p>
           </div>
         </td>

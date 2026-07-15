@@ -14,6 +14,10 @@ const allProjects = await getCollection('projects');
 const contentProjects = allProjects.filter(p => !p.data.spotlight)
 
 const spotlightProject = allProjects.find(p => p.data.spotlight);
+
+/* Project Numbers values */
+const projectCount = allProjects.length;
+const liveDemoCount = allProjects.filter((p) => p.data.liveUrl).length;
 ---
 
 <BaseLayout pageTitle="Projects">
@@ -28,7 +32,7 @@ const spotlightProject = allProjects.find(p => p.data.spotlight);
         </div>
         <div class = main-content-section>
           <div class = project-hero-grid>
-            <ProjectNumbers />
+            <ProjectNumbers projectCount={projectCount} liveDemoCount={liveDemoCount}/>
 
             <div class = featured-project>
               {spotlightProject && 
