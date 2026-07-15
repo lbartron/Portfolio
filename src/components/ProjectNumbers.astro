@@ -56,6 +56,8 @@ const { projectCount, liveDemoCount } = Astro.props;
 <style>
   .project-numbers {
     width: 100%;
+    container-type: inline-size;
+    container-name: pnt;
   }
 
   .project-numbers-table {
@@ -114,11 +116,8 @@ const { projectCount, liveDemoCount } = Astro.props;
   @media(max-width: 1024px) {
     /* Need to make the pnt table viewable on mobile */
     .project-numbers {
-
-    }
-
-    .pnt-cell-number {
-      font-size: 1.5rem;
+      table-layout: auto;
+      box-sizing: border-box;
     }
 
     .project-numbers-table td {
@@ -126,9 +125,32 @@ const { projectCount, liveDemoCount } = Astro.props;
       text-align: center;
       vertical-align: middle;
     }
+  }
 
+  @container pnt (max-width: 700px) {
+    .pnt-cell-number {
+      font-size: 1.5rem;
+    }
     .pnt-cell-desc {
-      font-size: .75rem
+      font-size: 0.75rem;
+    }
+  }
+
+  @container pnt (max-width: 400px) {
+    .pnt-cell-number {
+      font-size: 1.15rem;
+    }
+    .pnt-cell-desc {
+      font-size: 0.65rem;
+    }
+  }
+
+  @container pnt (max-width: 320px) {
+    .pnt-cell-number {
+      font-size: 0.85rem;
+    }
+    .pnt-cell-desc {
+      font-size: 0.55rem;
     }
   }
 </style>
