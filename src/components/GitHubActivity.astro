@@ -40,8 +40,6 @@ for (const project of projects) {
 <style>
   .github-log {
     grid-column: 2;
-    grid-row: 1 / -1;
-    /* width: 100%; */
     height: auto;
     background-color: light-dark(#fdfdfd, #2a2a2a);
     border: 1px solid var(--border-color);
@@ -51,6 +49,7 @@ for (const project of projects) {
     /* Enforce container height for content injection */
     overflow: hidden;
     box-sizing: border-box;
+    align-self: start;
   }
 
   .github-log-header {
@@ -126,7 +125,6 @@ for (const project of projects) {
   @media (max-width: 1024px) {
     .github-log {
       grid-column: auto; 
-      grid-row: auto;
     }
   }
 </style>

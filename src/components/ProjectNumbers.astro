@@ -56,8 +56,6 @@ const { projectCount, liveDemoCount } = Astro.props;
 <style>
   .project-numbers {
     width: 100%;
-    grid-column: 1;
-    grid-row: 1;
   }
 
   .project-numbers-table {
@@ -116,8 +114,7 @@ const { projectCount, liveDemoCount } = Astro.props;
   @media(max-width: 1024px) {
     /* Need to make the pnt table viewable on mobile */
     .project-numbers {
-      grid-column: auto;
-      grid-row: auto;
+
     }
 
     .pnt-cell-number {

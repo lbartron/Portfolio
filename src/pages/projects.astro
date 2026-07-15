@@ -32,25 +32,28 @@ const liveDemoCount = allProjects.filter((p) => p.data.liveUrl).length;
         </div>
         <div class = main-content-section>
           <div class = project-hero-grid>
-            <ProjectNumbers projectCount={projectCount} liveDemoCount={liveDemoCount}/>
+            <div class = project-grid-sidebar>
+              <ProjectNumbers projectCount={projectCount} liveDemoCount={liveDemoCount}/>
 
-            <div class = featured-project>
-              {spotlightProject && 
-              <ProjectTile 
-                title={spotlightProject.data.title}
-                description={spotlightProject.data.description}
-                themeColor={spotlightProject.data.themeColor}
-                slug={spotlightProject.id}
-                liveUrl={spotlightProject.data.liveUrl}
-                githubUrl={spotlightProject.data.githubUrl}
-                detailsUrl={spotlightProject.data.detailsUrl}
-                devpostUrl={spotlightProject.data.devpostUrl}
-                image={spotlightProject.data.image}
-                projectTags={spotlightProject.data.projectTags}
-                featured={true}
-              />
-              }
+              <div class = featured-project>
+                {spotlightProject && 
+                <ProjectTile 
+                  title={spotlightProject.data.title}
+                  description={spotlightProject.data.description}
+                  themeColor={spotlightProject.data.themeColor}
+                  slug={spotlightProject.id}
+                  liveUrl={spotlightProject.data.liveUrl}
+                  githubUrl={spotlightProject.data.githubUrl}
+                  detailsUrl={spotlightProject.data.detailsUrl}
+                  devpostUrl={spotlightProject.data.devpostUrl}
+                  image={spotlightProject.data.image}
+                  projectTags={spotlightProject.data.projectTags}
+                  featured={true}
+                />
+                }
+              </div>
             </div>
+            
             <GitHubActivity />
           </div>
         </div>
@@ -85,26 +88,25 @@ const liveDemoCount = allProjects.filter((p) => p.data.liveUrl).length;
   .project-hero-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto 1fr;
     column-gap: 1rem;
     row-gap: 1rem;
   }
 
+  .project-grid-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;  
+    align-self: start;
+  }
+
   .featured-project {
-    grid-column: 1;
-    grid-row: 2;
+    flex: 1;  
     width: 100%;
   }
 
   @media ( max-width: 1024px ) {
     .project-hero-grid {
       grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-      grid-template-rows: auto;
-    }
-
-    .featured-project {
-      grid-column: auto; 
-      grid-row: auto;
     }
   }
 </style>
