@@ -1,17 +1,27 @@
+/* Use GitHub PAC during development */
+const ghHeaders = import.meta.env.PUBLIC_GH_DEV_TOKEN
+  ? { Authorization: `Bearer ${import.meta.env.PUBLIC_GH_DEV_TOKEN}` }
+  : {};
+
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".github-log");
   if (!container) return;
+
+  const sidebarEl = document.querySelector(".project-grid-sidebar");
 
   const username = container.dataset.username;
   const repoColors = JSON.parse(container.dataset.repoColors || "{}");
   const list = container.querySelector(".github-log-list");
 
+  let items = [];
+
   try {
-    const res = await fetch(`https://api.github.com/users/${username}/events/public`);
+    const res = await fetch(`https://api.github.com/users/${username}/events/public`, { headers: ghHeaders });
     if (!res.ok) throw new Error(`GitHub API responded with ${res.status}`);
 
     const events = await res.json();
-    const pushes = events.filter((event) => event.type === "PushEvent").slice(0, 5);
+    /* Request 12 commits which allows 5 page refreshes an hour */
+    const pushes = events.filter((event) => event.type === "PushEvent").slice(0, 12);
 
     if (pushes.length === 0) {
       list.innerHTML = '<li class="github-log-error">No recent public activity found.</li>';
@@ -21,15 +31,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     // allSettled so one failed lookup doesn't take down the whole feed.
     const lookups = await Promise.allSettled(
       pushes.map((event) =>
-        fetch(`https://api.github.com/repos/${event.repo.name}/commits/${event.payload.head}`).then((r) => {
+        fetch(`https://api.github.com/repos/${event.repo.name}/commits/${event.payload.head}`, { headers: ghHeaders }).then((r) => {
           if (!r.ok) throw new Error(`commit lookup failed: ${r.status}`);
           return r.json();
         })
       )
     );
 
-    const items = pushes.map((event, i) => {
-      const repoFullName = event.repo.name; // "owner/repo"
+    items = pushes.map((event, i) => {
+      const repoFullName = event.repo.name;
       const repoDisplayName = repoFullName.split("/").pop();
       const branch = event.payload.ref.replace("refs/heads/", "");
       const shortSha = event.payload.head.slice(0, 7);
@@ -47,22 +57,48 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       return { repoDisplayName, color, shortSha, timeAgo, message, url };
     });
-
-    list.innerHTML = items
-      .map(
-        (item) => `
-          <li class="github-log-item">
-            <span class="repo-tag" style="color:${item.color}">${escapeHtml(item.repoDisplayName)}</span>
-            <a class="commit-message" href="${item.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.message)}</a>
-            <span class="commit-meta">${item.shortSha} · ${item.timeAgo}</span>
-          </li>
-        `
-      )
-      .join("");
   } catch (err) {
     list.innerHTML = '<li class="github-log-error">Couldn\'t load recent activity right now.</li>';
     console.error("Build log fetch failed:", err);
+    return;
   }
+
+  function layoutAndFit() {
+    container.style.height = "";
+
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      if (sidebarEl) {
+        const targetHeight = sidebarEl.getBoundingClientRect().height;
+        container.style.height = `${targetHeight}px`;
+      }
+    }
+
+    list.innerHTML = "";
+    for (const item of items) {
+      const li = document.createElement("li");
+      li.className = "github-log-item";
+      li.innerHTML = `
+        <span class="repo-tag" style="color:${item.color}">${escapeHtml(item.repoDisplayName)}</span>
+        <a class="commit-message" href="${item.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.message)}</a>
+        <span class="commit-meta">${item.shortSha} - ${item.timeAgo}</span>
+      `;
+      list.appendChild(li);
+
+      if (container.scrollHeight > container.clientHeight) {
+        li.remove();
+        break;
+      }
+    }
+  }
+
+  layoutAndFit();
+
+  let resizeTimeout;
+  const observer = new ResizeObserver(() => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(layoutAndFit, 150);
+  });
+  if (sidebarEl) observer.observe(sidebarEl);
 });
 
 function getRelativeTime(date) {
