@@ -1,8 +1,25 @@
 ---
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const repoNames: string[] = [];
+
+for (const project of allProjects) {
+  if (project.data.githubUrl) {
+    try {
+      const { pathname } = new URL(project.data.githubUrl);
+      const [, owner, repo] = pathname.split("/");
+      if (owner && repo) repoNames.push(`${owner}/${repo}`);
+    } catch {
+      // Skip malformed URLs
+    }
+  }
+}
+
 const { projectCount, liveDemoCount } = Astro.props;
 ---
 
-<div class = project-numbers>
+<div class = project-numbers data-repos={JSON.stringify(repoNames)}>
   <table class = project-numbers-table>
     <tbody>
       <tr>
@@ -20,8 +37,8 @@ const { projectCount, liveDemoCount } = Astro.props;
         </td>
         <td>
           <div class = pnt-cell>
-            <h2 class = pnt-cell-number>1k+</h2>
-            <p class = pnt-cell-desc>Events Indexed</p>
+            <h2 class = pnt-cell-number id=commit-count>1k+</h2>
+            <p class = pnt-cell-desc>Commits Created</p>
           </div>
         </td>
         <td>
@@ -33,6 +50,7 @@ const { projectCount, liveDemoCount } = Astro.props;
       </tr>
     </tbody>
   </table>
+  <script src="../scripts/getcommitcount.js"></script>
 </div>
 
 <style>
