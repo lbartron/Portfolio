@@ -76,8 +76,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function layoutAndFit() {
     container.style.height = "";
+    const limitedHeight = window.matchMedia("(min-width: 1024px)").matches;
 
-    if (window.matchMedia("(min-width: 1024px)").matches) {
+    if (limitedHeight) {
       if (sidebarEl) {
         const targetHeight = sidebarEl.getBoundingClientRect().height;
         container.style.height = `${targetHeight}px`;
@@ -85,7 +86,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     list.innerHTML = "";
-    for (const item of items) {
+    const itemsToRender = limitedHeight ? items : items.slice(0, 5); // Limit content count on mobile
+
+    for (const item of itemsToRender) {
       const li = document.createElement("li");
       li.className = "github-log-item";
       li.innerHTML = `
