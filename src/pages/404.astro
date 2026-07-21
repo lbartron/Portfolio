@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SideBar from '../components/SideBar.astro';
+import NavBar from '../components/NavBar.astro';
+---
+
+<BaseLayout pageTitle="Page Not Found">
+  <div class = "layout">
+    <SideBar/>
+    <NavBar/>
+    <div class = main-container>
+      <div class = main-content-wrapper>
+        <div class = blueprint-background-container></div>
+
+        <div class = scattered-tags>
+          <a href={`${import.meta.env.BASE_URL}projects/`} class="tape-tag tag-projects">Projects</a>
+          <a href={`${import.meta.env.BASE_URL}notes/`} class="tape-tag tag-notes">Notes</a>
+          <a href={`${import.meta.env.BASE_URL}about/`} class="tape-tag tag-about">About Me</a>
+          <a href="https://github.com/lbartron" target="_blank" rel="noopener noreferrer" class="tape-tag tag-github">GitHub</a>
+        </div>
+
+        <div class = main-content-section>
+          <div class = not-found-content>
+            <h1 class = not-found-heading>404</h1>
+            <h2 class = not-found-subheading>This page drifted off somewhere</h2>
+            <p class = not-found-text>The link you followed doesn't lead anywhere anymore.</p>
+            <a href={`${import.meta.env.BASE_URL}`} class="retro-link">&larr; Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  body {
+    padding-right: 0;
+  }
+
+  .main-container {
+    min-height: 100dvh; 
+    height: 100vh;
+  
+    /* Establish a column-based flex container */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+  }
+
+  .main-content-wrapper {
+    background: none;
+    flex: 1;
+    display: grid;
+    grid-template-areas: "overlay";
+    padding: 0;
+  }
+
+  .main-content-section {
+    grid-area: overlay;
+    place-self: center;
+    z-index: 3;
+  }
+
+  .blueprint-background-container {
+    background-color: var(--bg-color);
+    background-image: 
+      /* horizontal lines */
+      linear-gradient(var(--retro-navy) 1px, transparent 1px),
+      /* vertical lines */
+      linear-gradient(90deg, var(--retro-navy) 1px, transparent 1px);
+    background-size: 20px 20px; /* blueprint grid cell size */
+    background-position: center;
+    position: relative;
+    grid-area: overlay;
+  }
+  
+  /* Pseudo-element overlay to dim the grid so text stays readable */
+  .blueprint-background-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-color);
+    opacity: 0.75; /* Adjust this to make the grid brighter or dimmer */
+    z-index: 0;
+  }
+
+  .not-found-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .not-found-heading {
+    margin: 0;
+    font-size: clamp(4rem, 25vw, 10rem);
+    font-family: var(--font-display);
+    font-weight: 100;
+    color: hsl(from var(--retro-red) h 90% l);
+  }
+  
+  .not-found-subheading {
+    margin: 0;
+  }
+
+  .not-found-text {
+    font-family: var(--font-terminal);
+    max-width: 60%;
+  }
+
+  .retro-link {
+    font-size: clamp(1rem, 5vw, 2rem);
+  }
+
+  .scattered-tags {
+    position: relative;
+    grid-area: overlay;
+    pointer-events: none;
+  }
+
+  .scattered-tags .tape-tag {
+    position: absolute;
+    text-decoration: none;
+    pointer-events: auto;
+  }
+
+  .tag-projects {
+    top: 12%;
+    left: 18%;
+    background-color: var(--retro-yellow);
+    transform: rotate(-6deg);
+  }
+
+  .tag-notes {
+    top: 18%;
+    right: 12%;
+    background-color: var(--retro-navy);
+    color: #ffffff;
+    transform: rotate(4deg);
+  }
+
+  .tag-about {
+    bottom: 15%;
+    left: 22%;
+    background-color: var(--retro-orange);
+    transform: rotate(5deg);
+  }
+
+  .tag-github {
+    bottom: 12%;
+    right: 15%;
+    background-color: var(--retro-red);
+    color: #ffffff;
+    transform: rotate(-4deg);
+  }
+</style>
