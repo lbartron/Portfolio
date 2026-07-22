@@ -1,0 +1,20 @@
+---
+---
+<a href="#" id="click-email" rel="nofollow noopener noreferrer">Email</a>
+
+<script>
+  // Pieces are combined when a user clicks the link
+  const part1 = "LeoB909";
+  const part2 = "hotmail";
+  const part3 = "com";
+
+  const link = document.getElementById('click-email');
+  if (link) {
+    link.addEventListener('click', (event) => {
+      // Prevent the browser from just navigating to "#"
+      event.preventDefault(); 
+      const fullEmail = `${part1}@${part2}.${part3}`;
+      window.location.href = `mailto:${fullEmail}`;
+    });
+  }
+</script>
