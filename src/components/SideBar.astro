@@ -6,6 +6,8 @@ import { Image } from 'astro:assets';
 import projectsIcon from '/src/assets/images/projects.png';
 import notesIcon from '/src/assets/images/notes.png';
 import aboutIcon from '/src/assets/images/about-me.png';
+
+import SecureEmail from '../components/SecureEmail.astro';
 ---
 
 <aside class = sidebar>
@@ -21,7 +23,7 @@ import aboutIcon from '/src/assets/images/about-me.png';
     <h4> About Me </h4>
     <div class = sidebar-content>
       <p>
-        I'm a current student majoring in Computer Science and Software Engineering! 
+        Seattle based CS student at UW. Currently looking for SWE internships and research opportunities!
       </p>
     </div>
   </section>
@@ -60,6 +62,10 @@ import aboutIcon from '/src/assets/images/about-me.png';
       </a>
       <a href = "https://www.linkedin.com/in/leo-bartron">
         LinkedIn
+      </a>
+      <SecureEmail/>
+      <a href = "/Portfolio/Leo-Bartron-Resume.pdf" target="_blank">
+        Resume
       </a>
     </p>
   </section>
@@ -132,7 +138,7 @@ import aboutIcon from '/src/assets/images/about-me.png';
     flex-direction: column;
   }
 
-  .sidebar-connection-links a{
+  .sidebar-connection-links :global(a){
     color: var(--text-muted);
     padding-bottom: 10px;
   }
