@@ -16,7 +16,7 @@
     },
     {
       "date": "May 2023",
-      "title": "Kamiak Highschool",
+      "title": "Kamiak High School",
       "description": "High School Diploma.",
       "color": "var(--retro-red)"
     }
@@ -31,7 +31,7 @@
     {
       "date": "April 2026",
       "title": "UWB Hacks 2026",
-      "description": "Develoepd LearnAI: a comprehensive, responsive educational platform dedicated to teaching artificial intelligence fundamentals to learners of all levels. The content is split into several interactive learning modules.",
+      "description": "Developed LearnAI: a comprehensive, responsive educational platform dedicated to teaching artificial intelligence fundamentals to learners of all levels. The content is split into several interactive learning modules.",
       "color": "var(--retro-red)"
     },
     {
